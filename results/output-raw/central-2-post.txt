@@ -1,0 +1,14 @@
+[02:01:21.728 I] local_index.hpp:84: local index loaded 300013 files from /data/shared
+[02:01:21.728 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:01:21.771 I] peer.cpp:336: peer 3 initialised: ip=192.168.77.103 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=300013 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] query 'n05_s000000.txt' -> 2 hit(s): 192.168.77.113:51002, 192.168.77.112:51002 [8 ms]
+  holders for 'n05_s000000.txt':
+   #1 192.168.77.113:51002
+   #2 192.168.77.112:51002
+display file 'n05_s000000.txt' (9.77 KiB from 192.168.77.113:51002: download 3 ms, search 0 ms)
+display file 'n05_b0.bin' (100.00 MiB from 192.168.77.104:51002: download 357 ms, search 3 ms)
+peer 3: files=300013 neighbours_conn=0 routes=0 pending=0
+[02:01:22.180 W] peer.cpp:2036: peer shutting down
+[02:01:22.320 I] index_client.cpp:49: registered 300013 files with index server (ip 192.168.77.103 dport 51002)
+[02:01:22.320 W] index_client.cpp:138: index connection lost; re-registering

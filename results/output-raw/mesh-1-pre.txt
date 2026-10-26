@@ -1,0 +1,14 @@
+[02:56:36.577 I] local_index.hpp:84: local index loaded 300030 files from /data/shared
+[02:56:36.621 I] peer.cpp:336: peer 17 initialised: ip=192.168.77.117 msg=51000 control=51001 dl=51002 top=mesh neighbours=2 files=300030 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[02:56:37.297 I] peer.cpp:598: neighbour 192.168.77.116:51000 channel established (inbound, node 16)
+[02:56:37.421 I] peer.cpp:598: neighbour 192.168.77.113:51000 channel established (inbound, node 13)
+peer 17: files=300030 neighbours_conn=2 routes=0 pending=0
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] query 'n02_s000002.txt' -> 3 hit(s): 192.168.77.104:51002, 192.168.77.103:51002, 192.168.77.102:51002 [303 ms]
+  holders for 'n02_s000002.txt':
+   #1 192.168.77.104:51002
+   #2 192.168.77.103:51002
+   #3 192.168.77.102:51002
+display file 'n02_s000002.txt' (9.77 KiB from 192.168.77.104:51002: download 3 ms, search 2 ms)
+display file 'n02_b0.bin' (100.00 MiB from 192.168.77.104:51002: download 2444 ms, search 2 ms)
+[02:56:40.313 W] peer.cpp:2036: peer shutting down

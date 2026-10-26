@@ -1,0 +1,13 @@
+[04:18:40.711 I] local_index.hpp:84: local index loaded 307084 files from /data/shared
+[04:18:42.066 I] peer.cpp:336: peer 15 initialised: ip=192.168.77.115 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=307084 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[04:18:42.520 I] index_client.cpp:49: registered 307084 files with index server (ip 192.168.77.115 dport 51002)
+[04:19:12.083 I] peer.cpp:1884: status: neighbours_conn=0 files=307084 routes=0 pending=0
+[04:19:33.230 I] peer.cpp:1703: REPLICATION-DONE pushed=0 skipped=200020 elapsed_ms=51147 (factor=3, index=307084)
+[04:19:42.100 I] peer.cpp:1884: status: neighbours_conn=0 files=307084 routes=0 pending=0
+[04:20:12.117 I] peer.cpp:1884: status: neighbours_conn=0 files=307084 routes=0 pending=0
+[04:20:42.137 I] peer.cpp:1884: status: neighbours_conn=0 files=307084 routes=0 pending=0
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.114:51002: download 148648 ms, search 1 ms)
+peer 15: files=307084 neighbours_conn=0 routes=0 pending=0
+[04:21:10.718 W] peer.cpp:2036: peer shutting down
+[04:21:11.059 W] index_client.cpp:138: index connection lost; re-registering

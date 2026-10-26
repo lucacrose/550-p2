@@ -1,0 +1,46 @@
+[17:50:33] binary pinned: 3642a8736e3c9deac79af6d023e52815
+[17:50:46] scrub (test debris) done across the fleet
+== peer1 CLI: query + obtain of a file that lives only on node3 ==
+[17:51:41.769 I] local_index.hpp:84: local index loaded 2 files from /home/cc/pa2/test/shared1
+[17:51:41.769 I] peer.cpp:116: journal loaded: 8 lines from /home/cc/pa2/test/.p2p-repl.meta
+[17:51:41.769 I] peer.cpp:336: peer 1 initialised: ip=127.0.0.1 msg=51000 control=51001 dl=51002 top=mesh neighbours=2 files=2 ring=0 rf=0 journal=/home/cc/pa2/test/.p2p-repl.meta ring_fallback=1
+[17:51:41.770 I] peer.cpp:496: neighbour 127.0.0.1:52000 channel established (outbound dial)
+[17:51:41.770 I] peer.cpp:496: neighbour 127.0.0.1:54000 channel established (outbound dial)
+[client] query 'nonexistant-file.txt' -> no results (timed out after 8203 ms)
+[client] query 'mesh3_f1.txt' -> 1 hit(s): 127.0.0.1:53002 [301 ms]
+  holders for 'mesh3_f1.txt':
+   #1 127.0.0.1:53002
+display file 'mesh3_f2.bin' (292.97 KiB from 127.0.0.1:53002: download 3 ms, search 0 ms)
+peer 1: files=2 neighbours_conn=2 routes=3 pending=0
+[17:51:50.326 W] peer.cpp:2036: peer shutting down
+== node2 relay evidence (hitquery relayed) ==
+== stopping mesh ==
+== index log after registrations ==
+[17:51:52.883 I] index.cpp:12: index server starting: port=55000
+[17:51:53.411 I] index.cpp:106: node 2 registering (127.0.0.1:52002, 2 files)...
+[17:51:53.411 I] index.cpp:106: node 3 registering (127.0.0.1:53002, 2 files)...
+== client on peer1 looks up a file that only peer2 has ==
+[17:51:55.415 I] local_index.hpp:84: local index loaded 2 files from /home/cc/pa2/test/shared1
+[17:51:55.415 I] peer.cpp:116: journal loaded: 8 lines from /home/cc/pa2/test/.p2p-repl.meta
+[17:51:55.415 I] peer.cpp:336: peer 1 initialised: ip=127.0.0.1 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=2 ring=0 rf=0 journal=/home/cc/pa2/test/.p2p-repl.meta ring_fallback=1
+[17:51:55.416 I] index_client.cpp:49: registered 2 files with index server (ip 127.0.0.1 dport 51002)
+[client] query 'mesh2_f1.txt' -> 1 hit(s): 127.0.0.1:52002 [1 ms]
+  holders for 'mesh2_f1.txt':
+   #1 127.0.0.1:52002
+display file 'mesh2_f2.bin' (195.31 KiB from 127.0.0.1:52002: download 3 ms, search 0 ms)
+[17:51:58.916 W] peer.cpp:2036: peer shutting down
+[17:51:58.917 W] index_client.cpp:138: index connection lost; re-registering
+== bench: 2 clients x 50 queries against peer3 ==
+client 1: ops=50 ok=37 reconnects=0 avg=256.46us stdev=70.32 p50=238.00 p95=375.00 p99=635.00 max=635.00 (us)
+FAIL query mesh1_f1.txt seq=98 took=223us
+client 0: ops=50 ok=37 reconnects=0 avg=263.20us stdev=66.88 p50=241.00 p95=434.00 p99=567.00 max=567.00 (us)
+bench done: ops=100 ok=74 wall=0.01s throughput=7142.9 ops/s bytes=0 (0.00 MiB/s)
+BENCH-SUMMARY ops=100 ok=74 fail=26 wall_s=0.01 throughput=7142.9 avg_us=259.83 stdev_us=68.36 p50_us=240.00 p95_us=375.00 p99_us=567.00 max_us=635.00 bytes=0 mibs=0.00 seed=11939297478530613735 start_at=0
+== stopping central ==
+SMOKE-OK
+[17:52:00] system fresh; waiting 240 s for initial replication duty to settle (ring churn stabilizes free space)
+[17:56:00] plus designed set for the capacity gate: {8 9 14}, client vm15
+[17:56:00] GC trigger fired on vm8 (probe95.bin + rescan; binary's own gcScan - it judges its journal and purges replacement-class copies; the binary's verdicts stay in its peer.log)
+[18:11:01] vm8 free after GC settle: 2365427712 bytes (gate needs 4609540097); binary GC verdict tail -> /home/cc/pa2/results/huge4g/plus-9e/gc-vm8-note.txt
+[18:11:01] space gate vm8: free 2365427712 bytes (need >= 4609540097)
+PLUS1-FAIL: abort: vm8 free 2365427712 < (4 GiB+1) + 300 MiB for the second file (gate UNCHANGED - this is an honest disk-capacity finding for the ring dataset on this fleet)

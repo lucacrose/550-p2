@@ -1,0 +1,168 @@
+[09:59:16] owner=vm14 (most free), designed set {6 7 14}, client=vm15 (non-holder, most free)
+[09:59:16] space gate vm6: free 5551382528 bytes (need >= 4609540096)
+[09:59:16] space gate vm7: free 6348374016 bytes (need >= 4609540096)
+[09:59:16] space gate vm14: free 13494222848 bytes (need >= 4609540096)
+[09:59:16] space gate vm15: free 10081439744 bytes (need >= 4609540096)
+started central topology; waiting for peer readiness...
+all 16 peers responding (vm03: neighbours=0)
+CENTRAL-READY (index mode reports neighbours=0)
+waiting for in-program initial replication to finish (marker)...
+initial replication pass done on all 16 peers in 0 s
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=429635 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=338380 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=325609 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307269 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307587 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307581 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307327 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307316 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307532 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307290 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307490 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307181 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307403 repl(push=0 skip=200024 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=307084 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=385383 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=430712 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+START-OK (central)
+[10:00:29] warmup: 60 s fully idle to settle the owner's liveness probes
+[10:02:35] created huge4g-4096mib.bin (4294967296 bytes) on vm14 via fallocate-sparse-zero (fallback head-c /dev/zero)
+[10:03:09] source digest sha256 (huge4g-4096mib.bin) = 8479e43911dc45e89f934fe48d01297e16f51d17aa561d4d1c216b1ae0fcddca (computed on the owner at creation)
+[10:12:43] convergence interval opened t+574s: exactly 3 exact-size holders {6 9 14}
+[10:15:58] placement converged t+769s: exactly 3 exact-size holders {6 9 14} held for 18 consecutive polls (>= 180 s); scan: holders=[6 9 14] dead-servent=[] unreachable=[] wrong-size=[] part-debris=[]
+[10:15:58] final census (huge4g-4096mib.bin): holders=[6 9 14] dead-servent=[] unreachable=[] wrong-size=[] part-debris=[]
+[10:18:08] final sha256 verification pass: all 3 census holders match the source digest (huge4g-4096mib.bin)
+[10:18:08] placed: huge4g-4096mib.bin live {6 9 14} (3 verified copies) != designed {6 7 14} - reroute-class holders per the binary's documented replacement design (peer.cpp:1352); see devlog run-#5-#8 chronology
+[10:18:15] central: page caches dropped on the 4 involved VMs; timed obtain now
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.114:51002: download 148648 ms, search 1 ms)
+[10:27:49] central: all 4 holder+client sha256 digests identical and equal to the source digest (huge4g-4096mib.bin: live holders {6 9 14}; the client /data/downloads copy is digest-verified but excluded from the RF count)
+[10:27:52] holders @ central: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+[10:27:52] DIVERGENCE event (central): fleet state differs from the certified 3-copy set: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+started star topology; waiting for peer readiness...
+all 16 peers responding (vm03: neighbours=1)
+hub link check: neighbours=1
+waiting for in-program initial replication to finish (marker)...
+  repl 1s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 10s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 15s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 21s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 27s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 32s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 37s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 43s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 49s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 55s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm9 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 60s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 66s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 71s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 76s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 82s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 87s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm10 vm12 vm13 vm14 vm15 vm16 vm17
+  repl 93s, still pushing: vm2 vm3 vm4 vm5 vm6 vm7 vm8 vm13 vm14 vm16 vm17
+  repl 98s, still pushing: vm4 vm6 vm8 vm14 vm16 vm17
+  repl 104s, still pushing: vm4 vm6 vm8 vm14 vm16 vm17
+  repl 109s, still pushing: vm4 vm6 vm8 vm14 vm16 vm17
+  repl 125s, still pushing: vm4 vm6 vm8 vm14 vm16 vm17
+  repl 140s, still pushing: vm6 vm14 vm16 vm17
+  repl 152s, still pushing: vm6 vm14 vm16 vm17
+  repl 158s, still pushing: vm6 vm14 vm16 vm17
+  repl 163s, still pushing: vm6 vm14 vm16 vm17
+  repl 169s, still pushing: vm6 vm14 vm16 vm17
+  repl 176s, still pushing: vm6 vm14 vm16 vm17
+  repl 181s, still pushing: vm6 vm14 vm16 vm17
+  repl 187s, still pushing: vm6 vm14 vm16 vm17
+  repl 192s, still pushing: vm6 vm14 vm16 vm17
+  repl 198s, still pushing: vm14 vm16 vm17
+  repl 204s, still pushing: vm14 vm16 vm17
+  repl 210s, still pushing: vm14 vm16 vm17
+  repl 217s, still pushing: vm14 vm17
+  repl 223s, still pushing: vm14 vm17
+  repl 228s, still pushing: vm14 vm17
+  repl 234s, still pushing: vm14 vm17
+  repl 240s, still pushing: vm14 vm17
+  repl 250s, still pushing: vm14 vm17
+  repl 256s, still pushing: vm14 vm17
+  repl 262s, still pushing: vm14 vm17
+  repl 268s, still pushing: vm14 vm17
+  repl 274s, still pushing: vm14 vm17
+  repl 279s, still pushing: vm14 vm17
+  repl 285s, still pushing: vm14 vm17
+  repl 290s, still pushing: vm14 vm17
+  repl 298s, still pushing: vm14 vm17
+  repl 303s, still pushing: vm14 vm17
+  repl 308s, still pushing: vm14 vm17
+  repl 314s, still pushing: vm14 vm17
+  repl 319s, still pushing: vm14 vm17
+  repl 324s, still pushing: vm14 vm17
+  repl 333s, still pushing: vm14 vm17
+  repl 338s, still pushing: vm14 vm17
+  repl 369s, still pushing: vm17
+  repl 400s, still pushing: vm17
+  repl 431s, still pushing: vm17
+  repl 461s, still pushing: vm17
+  repl 492s, still pushing: vm17
+  repl 523s, still pushing: vm17
+  repl 555s, still pushing: vm17
+  repl 584s, still pushing: vm17
+initial replication pass done on all 16 peers in 616 s
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=15 files=430444 repl(push=675 skip=200059 recv=371,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=339611 repl(push=1883 skip=200410 recv=1225,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=327035 repl(push=493 skip=200072 recv=1418,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308688 repl(push=1662 skip=200374 recv=1412,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=309078 repl(push=801 skip=200033 recv=1488,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=309071 repl(push=1042 skip=200037 recv=1488,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308758 repl(push=2175 skip=200576 recv=1425,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308847 repl(push=853 skip=200174 recv=1521,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=309004 repl(push=1061 skip=200051 recv=1466,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308628 repl(push=3052 skip=224029 recv=1328,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308961 repl(push=1043 skip=200071 recv=1463,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308573 repl(push=2098 skip=200456 recv=1381,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308886 repl(push=1078 skip=200062 recv=1473,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=308552 repl(push=938 skip=200188 recv=1508,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=401705 repl(push=1098 skip=200126 recv=1379,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=434518 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+START-OK (star)
+[10:42:37] star: page caches dropped on the 4 involved VMs; timed obtain now
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.114:51002: download 110447 ms, search 3 ms)
+[10:47:18] star: all 4 holder+client sha256 digests identical and equal to the source digest (huge4g-4096mib.bin: live holders {6 9 14}; the client /data/downloads copy is digest-verified but excluded from the RF count)
+[10:47:19] holders @ star: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+[10:47:19] DIVERGENCE event (star): fleet state differs from the certified 3-copy set: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+started mesh topology; waiting for peer readiness...
+all 16 peers responding (vm03: neighbours=3)
+mesh sample: neighbours=3
+waiting for in-program initial replication to finish (marker)...
+initial replication pass done on all 16 peers in 0 s
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=430586 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=339611 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=327035 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=308688 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=309078 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=309071 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=308758 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=308847 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=309004 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=308628 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=308961 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=308573 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=308886 repl(push=0 skip=200026 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=308552 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=417020 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=435637 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+START-OK (mesh)
+[10:51:06] mesh: page caches dropped on the 4 involved VMs; timed obtain now
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.114:51002: download 59935 ms, search 1 ms)
+[10:57:25] mesh: all 4 holder+client sha256 digests identical and equal to the source digest (huge4g-4096mib.bin: live holders {6 9 14}; the client /data/downloads copy is digest-verified but excluded from the RF count)
+[10:57:57] holders @ mesh: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+[10:57:57] DIVERGENCE event (mesh): fleet state differs from the certified 3-copy set: holders=[6 7 9 14] dead-servent=[15:none] unreachable=[] wrong-size=[] part-debris=[]
+[11:04:17] pre-kill fleet state: holders=[6 7 9 14] dead-servent=[] unreachable=[] wrong-size=[] part-debris=[]
+[11:04:18] pre-kill fleet state: holders=[6 7 9 14] dead-servent=[] unreachable=[] wrong-size=[] part-debris=[]
+[11:04:18] kill phase: divergence extras at kill census (recorded, not laundered; sec.1): 7 
+[11:04:18] kill phase: SIGKILL the servent of non-owner holder vm6 (live copies {6 7 9 14}; owner vm14 and the other holder stay up; the honest-kill convention: TIME_WAIT must never hold a port)
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.109:51002: download 111919 ms, search 5 ms)
+[11:09:15] kill phase POSITIVE chain: client display 'display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.109:51002: download 111919 ms, search 5 ms)' -> vm9 (my_ip=192.168.77.109 in configs/central/node9.cfg, download_port=51002) -> peer.log: [05:06:22.973 I] peer.cpp:1165: served 'huge4g-4096mib.bin' (4.00 GiB) to a peer over direct download
+[11:09:43] KILL-RETRIEVE-OK: vm6 killed; fresh search+obtain via surviving vm15 retrieved the exact 4294967296-byte copy, sha256 == source digest; served by vm9 (positive peer.log evidence)
+[11:09:44] holders @ post-kill: holders=[7 9 14] dead-servent=[6:4294967296,15:none] unreachable=[] wrong-size=[] part-debris=[]
+bash: line 1: 134047 Killed                  nohup ~/pa2/p2p peer -c ~/pa2/configs/central/node15.cfg >> ~/pa2/logs/peer.log 2>&1 < /dev/null
+[11:57:45] recovery observation: rebuilt in 16 s - replacement holder(s) {7} now hold an exact-size copy while vm6 remained down (ADDITIONAL evidence, not the mandatory gate)
+[11:57:45] cleanup round 1: deleting huge4g-4096mib.bin from every location + journal scrub
+TEST4G-FAIL: abort: vm8 free 4372099072 < (4 GiB+1) + 300 MiB for the second file

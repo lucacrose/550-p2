@@ -1,0 +1,16 @@
+[02:23:21.071 W] peer.cpp:320: removed 1 stale .part files from /data/shared
+[02:23:21.300 I] local_index.hpp:84: local index loaded 300180 files from /data/shared
+[client] lookup failed for 'n05_s000000.txt'; ring fallback probed 3, found 2
+[client] query 'n05_s000000.txt' -> 2 hit(s): 192.168.77.105:51002, 192.168.77.113:51002 [8 ms]
+  holders for 'n05_s000000.txt':
+   #1 192.168.77.105:51002
+   #2 192.168.77.113:51002
+[client] lookup failed for 'n05_s000000.txt'; ring fallback probed 3, found 2
+display file 'n05_s000000.txt' (9.77 KiB from 192.168.77.105:51002: download 2 ms, search 7 ms)
+[02:23:21.300 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:23:21.337 I] peer.cpp:336: peer 9 initialised: ip=192.168.77.109 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=300180 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[02:23:21.346 I] peer.cpp:888: ring fallback: 'n05_s000000.txt' located at 2 probed holder(s)
+[02:23:21.353 I] peer.cpp:888: ring fallback: 'n05_s000000.txt' located at 2 probed holder(s)
+[02:23:21.355 W] peer.cpp:2036: peer shutting down
+[02:23:21.412 W] index_client.cpp:90: cannot connect to index server, retrying

@@ -1,0 +1,698 @@
+================================================================
+  PA2 OUTPUT SAMPLE -- all three deployments (central, star, mesh)
+  16 peers on 17 Chameleon VMs (vmNN = 192.168.77.(100+NN), rf=3)
+  run 2026-10-23 07:22:53 UTC; pinned binary md5 3642a8736e3c9deac79af6d023e52815
+## header statement: every line below is machine output (p2p ping,
+## in-system --cli console sessions, or the peer program log emitted
+## while the session ran; the peer binary itself printed all of it).
+## Nothing was typed by hand. No filtering: session captures include
+## the servent log lines that interleave with the console output.
+================================================================
+
+##################### CENTRAL DEPLOYMENT ########################
+## central: dedicated index server on vm01 answers every query
+## (PA1 semantics); obtain downloads from the 3 live copies (owner
+## + 2 FNV-1a64 ring holders) over the per-VM download plane.
+## 1. p2p ping --target 127.0.0.1:51001, every peer:
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=299988 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300013 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300026 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300031 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300120 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300104 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=299984 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300037 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300062 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300050 repl(push=0 skip=200026 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300068 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300003 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=299914 repl(push=0 skip=200024 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=299990 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300094 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=300030 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+## 2. in-system --cli console on vm08: the node's servent is replaced
+##    by the SAME pinned binary in --cli mode, commands fed on stdin.
+##    Target files: n05_s000000.txt (holders {5,12,13}) and n05_b0.bin
+##    (holders {4,5,6}); session node vm08 is not one of the holders,
+##    and the query hit list shows exactly the 3 designed copies.
+[01:50:48.687 I] local_index.hpp:84: local index loaded 299984 files from /data/shared
+[01:50:48.687 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[01:50:48.728 I] peer.cpp:336: peer 8 initialised: ip=192.168.77.108 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=299984 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+peer 8: files=299984 neighbours_conn=0 routes=0 pending=0
+[client] query 'n05_s000000.txt' -> 3 hit(s): 192.168.77.105:51002, 192.168.77.112:51002, 192.168.77.113:51002 [8 ms]
+  holders for 'n05_s000000.txt':
+   #1 192.168.77.105:51002
+   #2 192.168.77.112:51002
+   #3 192.168.77.113:51002
+display file 'n05_s000000.txt' (9.77 KiB from 192.168.77.105:51002: download 2 ms, search 0 ms)
+[01:50:49.411 I] index_client.cpp:49: registered 299984 files with index server (ip 192.168.77.108 dport 51002)
+display file 'n05_b0.bin' (100.00 MiB from 192.168.77.106:51002: download 1257 ms, search 1 ms)
+[01:50:50.182 W] peer.cpp:2036: peer shutting down
+[01:50:50.411 W] index_client.cpp:138: index connection lost; re-registering
+
+## 3. HARD kill (SIGKILL) of vm05 - the OWNER of both target files.
+##    The ring maintenance pass re-converges both names to 3 live
+##    copies (new placement) before the post-kill session starts.
+  kill issued 2026-10-23T07:50:53.969Z on vm05
+## 4. post-kill --cli console on vm3 (holder of NEITHER file): the
+##    query now lists the 3 SURVIVING/re-converged copies and both
+##    obtains succeed from holders, including the 100 MiB file.
+[02:01:21.728 I] local_index.hpp:84: local index loaded 300013 files from /data/shared
+[02:01:21.728 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:01:21.771 I] peer.cpp:336: peer 3 initialised: ip=192.168.77.103 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=300013 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] query 'n05_s000000.txt' -> 2 hit(s): 192.168.77.113:51002, 192.168.77.112:51002 [8 ms]
+  holders for 'n05_s000000.txt':
+   #1 192.168.77.113:51002
+   #2 192.168.77.112:51002
+display file 'n05_s000000.txt' (9.77 KiB from 192.168.77.113:51002: download 3 ms, search 0 ms)
+display file 'n05_b0.bin' (100.00 MiB from 192.168.77.104:51002: download 357 ms, search 3 ms)
+peer 3: files=300013 neighbours_conn=0 routes=0 pending=0
+[02:01:22.180 W] peer.cpp:2036: peer shutting down
+[02:01:22.320 I] index_client.cpp:49: registered 300013 files with index server (ip 192.168.77.103 dport 51002)
+[02:01:22.320 W] index_client.cpp:138: index connection lost; re-registering
+
+## 5. Task 1 demo: files with ARBITRARY names (the prefix rule cannot
+##    name an owner for them) published on vm11 while the system runs.
+##    After publishing, the demo restarts the servents (the same
+##    start-system.sh central call the demo itself boots with): the
+##    fresh servents find the published files at their boot scan,
+##    adopt them into the provenance journal (owner=vm11) and the
+##    boot replication pass places them like any dataset name:
+##    out-arb-1m.bin holders {11,15,16}, out-arb-40m.bin
+##    holders {6,7,11} - 3 copies each, journal-verified placement.
+##    The restart also runs the built-in stale-copy GC of the binary
+##    (marker-triggered: a dry pass, then the real delete pass, all
+##    16 peers live) and then re-boots once more, so the index
+##    registration matches the on-disk set exactly (the Task-4 GC
+##    recipe of the shipped code); REPLACEMENT extras left over
+##    from the failover demos above are reclaimed here.
+##    session on vm10 (not a holder of either name): obtains BOTH
+##    arbitrary names over the network while the owner is alive:
+[02:15:08.915 I] local_index.hpp:84: local index loaded 301323 files from /data/shared
+[02:15:08.915 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:15:08.965 I] peer.cpp:336: peer 10 initialised: ip=192.168.77.110 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=301323 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+peer 10: files=301323 neighbours_conn=0 routes=0 pending=0
+[client] query 'out-arb-1m.bin' -> 3 hit(s): 192.168.77.111:51002, 192.168.77.115:51002, 192.168.77.116:51002 [6 ms]
+  holders for 'out-arb-1m.bin':
+   #1 192.168.77.111:51002
+   #2 192.168.77.115:51002
+   #3 192.168.77.116:51002
+display file 'out-arb-1m.bin' (1.00 MiB from 192.168.77.111:51002: download 7 ms, search 0 ms)
+display file 'out-arb-40m.bin' (40.00 MiB from 192.168.77.106:51002: download 441 ms, search 0 ms)
+[02:15:09.491 W] peer.cpp:2036: peer shutting down
+[02:15:09.674 I] index_client.cpp:49: registered 301323 files with index server (ip 192.168.77.110 dport 51002)
+[02:15:09.674 W] index_client.cpp:138: index connection lost; re-registering
+
+##    now HARD kill (SIGKILL) of vm11, the PUBLISHER (journal owner)
+##    of both arbitrary names; placement re-converges to 3 live copies
+##    and a fresh --cli console on vm12 obtains from the SURVIVING
+##    ring holders - the names survive their publisher's death:
+  kill issued 2026-10-23T08:15:14.251Z on vm11 (arbitrary-name publisher)
+[02:22:33.719 W] peer.cpp:320: removed 44 stale .part files from /data/shared
+[client] query 'out-arb-1m.bin' -> 2 hit(s): 192.168.77.116:51002, 192.168.77.115:51002 [3 ms]
+  holders for 'out-arb-1m.bin':
+   #1 192.168.77.116:51002
+   #2 192.168.77.115:51002
+display file 'out-arb-1m.bin' (1.00 MiB from 192.168.77.116:51002: download 9 ms, search 4 ms)
+[02:22:33.997 I] local_index.hpp:84: local index loaded 335048 files from /data/shared
+[02:22:33.998 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:22:34.062 I] peer.cpp:336: peer 12 initialised: ip=192.168.77.112 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=335048 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[02:22:34.181 I] peer.cpp:1279: replica stored: 'n02_s014628.txt' (9.77 KiB) indexed; files=335049
+[02:22:34.203 I] peer.cpp:1279: replica stored: 'n02_s089349.txt' (9.77 KiB) indexed; files=335050
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s004706.txt' (9.77 KiB) indexed; files=335051
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s020313.txt' (9.77 KiB) indexed; files=335052
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s075207.txt' (9.77 KiB) indexed; files=335053
+[02:22:34.225 I] peer.cpp:1279: replica stored: 'n03_s034021.txt' (9.77 KiB) indexed; files=335054
+[02:22:34.226 I] peer.cpp:1279: replica stored: 'n02_s023006.txt' (9.77 KiB) indexed; files=335055
+[02:22:34.234 I] peer.cpp:1279: replica stored: 'n02_s044030.txt' (9.77 KiB) indexed; files=335056
+[02:22:34.234 I] peer.cpp:1279: replica stored: 'n02_s014211.txt' (9.77 KiB) indexed; files=335057
+[02:22:34.262 I] peer.cpp:1279: replica stored: 'n02_s063929.txt' (9.77 KiB) indexed; files=335058
+[02:22:34.266 I] peer.cpp:1279: replica stored: 'n02_s094358.txt' (9.77 KiB) indexed; files=335059
+[02:22:34.267 I] peer.cpp:1279: replica stored: 'n07_s081458.txt' (9.77 KiB) indexed; files=335060
+[02:22:34.280 I] peer.cpp:1279: replica stored: 'n02_s050718.txt' (9.77 KiB) indexed; files=335061
+[02:22:34.293 I] peer.cpp:1279: replica stored: 'n05_s088213.txt' (9.77 KiB) indexed; files=335062
+[02:22:34.329 I] peer.cpp:1279: replica stored: 'n02_s005356.txt' (9.77 KiB) indexed; files=335063
+[02:22:34.335 I] peer.cpp:1279: replica stored: 'n03_s062336.txt' (9.77 KiB) indexed; files=335064
+[02:22:34.341 I] peer.cpp:1279: replica stored: 'n05_s008059.txt' (9.77 KiB) indexed; files=335065
+[02:22:34.350 I] peer.cpp:1279: replica stored: 'n05_s034197.txt' (9.77 KiB) indexed; files=335066
+[02:22:34.360 I] peer.cpp:1279: replica stored: 'n03_s069034.txt' (9.77 KiB) indexed; files=335067
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s050527.txt' (9.77 KiB) indexed; files=335068
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s085716.txt' (9.77 KiB) indexed; files=335069
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s040333.txt' (9.77 KiB) indexed; files=335070
+[02:22:34.438 I] peer.cpp:1279: replica stored: 'n03_s052021.txt' (9.77 KiB) indexed; files=335071
+[02:22:34.445 I] peer.cpp:1279: replica stored: 'n03_s043395.txt' (9.77 KiB) indexed; files=335072
+[02:22:34.447 I] peer.cpp:1279: replica stored: 'n05_s041463.txt' (9.77 KiB) indexed; files=335073
+[02:22:34.457 I] peer.cpp:1279: replica stored: 'n03_s089461.txt' (9.77 KiB) indexed; files=335074
+[02:22:34.469 I] peer.cpp:1279: replica stored: 'n03_s050197.txt' (9.77 KiB) indexed; files=335075
+[02:22:34.505 I] peer.cpp:1279: replica stored: 'n03_s076904.txt' (9.77 KiB) indexed; files=335076
+[02:22:34.511 I] peer.cpp:1279: replica stored: 'n03_s064042.txt' (9.77 KiB) indexed; files=335077
+[02:22:34.521 I] peer.cpp:1279: replica stored: 'n02_s076156.txt' (9.77 KiB) indexed; files=335078
+[02:22:34.542 I] peer.cpp:1279: replica stored: 'n02_s026672.txt' (9.77 KiB) indexed; files=335079
+[02:22:34.542 I] peer.cpp:1279: replica stored: 'n02_s035319.txt' (9.77 KiB) indexed; files=335080
+[02:22:34.582 I] index_client.cpp:49: registered 335048 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:34.582 I] index_client.cpp:49: registered 32 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:34.662 I] peer.cpp:1279: replica stored: 'n15_s008728.txt' (9.77 KiB) indexed; files=335081
+[02:22:34.679 I] peer.cpp:1279: replica stored: 'n05_s065281.txt' (9.77 KiB) indexed; files=335082
+[02:22:34.709 I] peer.cpp:1279: replica stored: 'n02_s063536.txt' (9.77 KiB) indexed; files=335083
+[02:22:34.727 I] peer.cpp:1279: replica stored: 'n03_s037055.txt' (9.77 KiB) indexed; files=335084
+[02:22:34.730 I] peer.cpp:1279: replica stored: 'n05_s038791.txt' (9.77 KiB) indexed; files=335085
+[02:22:34.735 I] peer.cpp:1279: replica stored: 'n05_s038852.txt' (9.77 KiB) indexed; files=335086
+[02:22:34.744 I] peer.cpp:1279: replica stored: 'n02_s032026.txt' (9.77 KiB) indexed; files=335087
+[02:22:34.773 I] peer.cpp:1279: replica stored: 'n05_s006677.txt' (9.77 KiB) indexed; files=335088
+[02:22:34.774 I] peer.cpp:1279: replica stored: 'n05_s056702.txt' (9.77 KiB) indexed; files=335089
+[02:22:34.780 I] peer.cpp:1279: replica stored: 'n15_s078266.txt' (9.77 KiB) indexed; files=335090
+[02:22:34.785 I] peer.cpp:1279: replica stored: 'n15_s093409.txt' (9.77 KiB) indexed; files=335091
+[02:22:34.806 I] peer.cpp:1279: replica stored: 'n07_s035062.txt' (9.77 KiB) indexed; files=335092
+[02:22:34.815 I] peer.cpp:1279: replica stored: 'n05_s001320.txt' (9.77 KiB) indexed; files=335093
+[02:22:34.820 I] peer.cpp:1279: replica stored: 'n02_s074446.txt' (9.77 KiB) indexed; files=335094
+[02:22:34.837 I] peer.cpp:1279: replica stored: 'n07_s010179.txt' (9.77 KiB) indexed; files=335095
+[02:22:34.844 I] peer.cpp:1279: replica stored: 'n07_s064176.txt' (9.77 KiB) indexed; files=335096
+[02:22:34.844 I] peer.cpp:1279: replica stored: 'n07_s047139.txt' (9.77 KiB) indexed; files=335097
+[02:22:34.864 I] peer.cpp:1279: replica stored: 'n02_s017791.txt' (9.77 KiB) indexed; files=335098
+[02:22:34.864 I] peer.cpp:1279: replica stored: 'n02_s028447.txt' (9.77 KiB) indexed; files=335099
+[02:22:34.865 I] peer.cpp:1279: replica stored: 'n02_s091982.txt' (9.77 KiB) indexed; files=335100
+[02:22:34.865 I] peer.cpp:1279: replica stored: 'n02_s081907.txt' (9.77 KiB) indexed; files=335101
+[02:22:35.083 I] index_client.cpp:49: registered 21 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:35.487 W] peer.cpp:2036: peer shutting down
+[02:22:35.583 W] index_client.cpp:138: index connection lost; re-registering
+
+## 6. Task 2 demo: HARD kill (SIGKILL) of the central index server
+##    (vm01). The lookup plane is dead, so the client synthesizes the
+##    holder list from the placement rule instead of failing: the
+##    "[client] lookup failed ..." fallback line is visible below, and
+##    the obtain succeeds from probed live holders (vm09 session,
+##    holder of the target file: none).
+[02:23:21.071 W] peer.cpp:320: removed 1 stale .part files from /data/shared
+[02:23:21.300 I] local_index.hpp:84: local index loaded 300180 files from /data/shared
+[client] lookup failed for 'n05_s000000.txt'; ring fallback probed 3, found 2
+[client] query 'n05_s000000.txt' -> 2 hit(s): 192.168.77.105:51002, 192.168.77.113:51002 [8 ms]
+  holders for 'n05_s000000.txt':
+   #1 192.168.77.105:51002
+   #2 192.168.77.113:51002
+[client] lookup failed for 'n05_s000000.txt'; ring fallback probed 3, found 2
+display file 'n05_s000000.txt' (9.77 KiB from 192.168.77.105:51002: download 2 ms, search 7 ms)
+[02:23:21.300 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:23:21.337 I] peer.cpp:336: peer 9 initialised: ip=192.168.77.109 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=300180 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[02:23:21.346 I] peer.cpp:888: ring fallback: 'n05_s000000.txt' located at 2 probed holder(s)
+[02:23:21.353 I] peer.cpp:888: ring fallback: 'n05_s000000.txt' located at 2 probed holder(s)
+[02:23:21.355 W] peer.cpp:2036: peer shutting down
+[02:23:21.412 W] index_client.cpp:90: cannot connect to index server, retrying
+
+###################### STAR DEPLOYMENT ##########################
+## star: hub vm02 + 15 leaves; every query path is leaf->hub->leaf
+## (TTL-scoped flood). Session node vm03 is a leaf and the target
+## files live on OTHER leaves - every session-to-holder path crosses
+## the hub (exactly 2 overlay hops).
+## 1. p2p ping --target 127.0.0.1:51001, every peer:
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=15 files=299988 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300013 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300026 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300031 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300120 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300104 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=299984 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300037 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300062 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300050 repl(push=0 skip=200026 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300068 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300003 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=299914 repl(push=0 skip=200024 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=299990 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300094 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=1 files=300030 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+## 2. --cli console on leaf vm03. Target files: n12_s000000.txt
+##    (holders {12,16,17}) and n12_b0.bin (holders {8,9,12}): owner
+##    vm12 is a leaf too - the console on vm03 never touches the
+##    holder side directly; hit list = 3 designed copies.
+[02:31:26.137 I] local_index.hpp:84: local index loaded 300013 files from /data/shared
+[02:31:26.137 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:31:26.176 I] peer.cpp:336: peer 3 initialised: ip=192.168.77.103 msg=51000 control=51001 dl=51002 top=star neighbours=1 files=300013 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[02:31:27.284 I] peer.cpp:598: neighbour 192.168.77.102:51000 channel established (inbound, node 2)
+peer 3: files=300013 neighbours_conn=1 routes=0 pending=0
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] query 'n12_s000000.txt' -> 3 hit(s): 192.168.77.116:51002, 192.168.77.112:51002, 192.168.77.117:51002 [303 ms]
+  holders for 'n12_s000000.txt':
+   #1 192.168.77.116:51002
+   #2 192.168.77.112:51002
+   #3 192.168.77.117:51002
+display file 'n12_s000000.txt' (9.77 KiB from 192.168.77.116:51002: download 14 ms, search 2 ms)
+display file 'n12_b0.bin' (100.00 MiB from 192.168.77.112:51002: download 1386 ms, search 1 ms)
+[02:31:29.154 W] peer.cpp:2036: peer shutting down
+
+## 3. HARD kill (SIGKILL) of leaf vm12 (owner of both targets, one of
+##    their designed holders). Maintenance re-converges to 3 live
+##    copies; a NEW leaf console (a surviving non-holder leaf picked
+##    dynamically below) obtains from the surviving ring holders:
+  kill issued 2026-10-23T08:31:33.245Z on vm12
+[02:43:04.858 W] peer.cpp:320: removed 18 stale .part files from /data/shared
+[02:43:05.133 I] local_index.hpp:84: local index loaded 317536 files from /data/shared
+[02:43:05.133 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:43:05.188 I] peer.cpp:336: peer 4 initialised: ip=192.168.77.104 msg=51000 control=51001 dl=51002 top=star neighbours=1 files=317536 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[02:43:05.308 I] peer.cpp:1279: replica stored: 'n02_s067906.txt' (9.77 KiB) indexed; files=317537
+[02:43:05.316 I] peer.cpp:1279: replica stored: 'n15_s060036.txt' (9.77 KiB) indexed; files=317538
+[02:43:05.317 I] peer.cpp:1279: replica stored: 'n11_s086564.txt' (9.77 KiB) indexed; files=317539
+[02:43:05.318 I] peer.cpp:1279: replica stored: 'n11_s072039.txt' (9.77 KiB) indexed; files=317540
+[02:43:05.325 I] peer.cpp:1279: replica stored: 'n03_s090732.txt' (9.77 KiB) indexed; files=317541
+[02:43:05.517 I] peer.cpp:1279: replica stored: 'n03_s032260.txt' (9.77 KiB) indexed; files=317542
+[02:43:05.538 I] peer.cpp:1279: replica stored: 'n03_s087392.txt' (9.77 KiB) indexed; files=317543
+[02:43:05.558 I] peer.cpp:1279: replica stored: 'n03_s039009.txt' (9.77 KiB) indexed; files=317544
+[02:43:05.559 I] peer.cpp:1279: replica stored: 'n02_s013794.txt' (9.77 KiB) indexed; files=317545
+[02:43:05.633 I] peer.cpp:1279: replica stored: 'n03_s077236.txt' (9.77 KiB) indexed; files=317546
+[02:43:05.635 I] peer.cpp:1279: replica stored: 'n03_s097599.txt' (9.77 KiB) indexed; files=317547
+[02:43:05.645 I] peer.cpp:1279: replica stored: 'n03_s016667.txt' (9.77 KiB) indexed; files=317548
+[02:43:05.668 I] peer.cpp:1279: replica stored: 'n03_s096670.txt' (9.77 KiB) indexed; files=317549
+[02:43:05.674 I] peer.cpp:1279: replica stored: 'n03_s019424.txt' (9.77 KiB) indexed; files=317550
+[02:43:05.778 I] peer.cpp:598: neighbour 192.168.77.102:51000 channel established (inbound, node 2)
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[02:43:05.822 I] peer.cpp:1279: replica stored: 'n15_s038730.txt' (9.77 KiB) indexed; files=317551
+[client] query 'n12_s000000.txt' -> 2 hit(s): 192.168.77.116:51002, 192.168.77.117:51002 [302 ms]
+  holders for 'n12_s000000.txt':
+   #1 192.168.77.116:51002
+   #2 192.168.77.117:51002
+display file 'n12_s000000.txt' (9.77 KiB from 192.168.77.117:51002: download 137 ms, search 1 ms)
+[02:43:06.286 I] peer.cpp:1279: replica stored: 'n03_s059381.txt' (9.77 KiB) indexed; files=317552
+[02:43:06.287 I] peer.cpp:1279: replica stored: 'n11_s081990.txt' (9.77 KiB) indexed; files=317553
+[02:43:06.574 I] peer.cpp:1279: replica stored: 'n03_s042029.txt' (9.77 KiB) indexed; files=317554
+display file 'n12_b0.bin' (100.00 MiB from 192.168.77.108:51002: download 6544 ms, search 1 ms)
+peer 4: files=317677 neighbours_conn=1 routes=3 pending=0
+[02:43:06.576 I] peer.cpp:1279: replica stored: 'n03_s036325.txt' (9.77 KiB) indexed; files=317555
+[02:43:06.618 I] peer.cpp:1279: replica stored: 'n03_s071270.txt' (9.77 KiB) indexed; files=317556
+[02:43:06.657 I] peer.cpp:1279: replica stored: 'n03_s099331.txt' (9.77 KiB) indexed; files=317557
+[02:43:06.658 I] peer.cpp:1279: replica stored: 'n02_s095806.txt' (9.77 KiB) indexed; files=317558
+[02:43:06.718 I] peer.cpp:1279: replica stored: 'n03_s098067.txt' (9.77 KiB) indexed; files=317559
+[02:43:06.813 I] peer.cpp:1279: replica stored: 'n02_s078784.txt' (9.77 KiB) indexed; files=317560
+[02:43:06.836 I] peer.cpp:1279: replica stored: 'n15_s038345.txt' (9.77 KiB) indexed; files=317561
+[02:43:06.908 I] peer.cpp:1279: replica stored: 'n03_s008645.txt' (9.77 KiB) indexed; files=317562
+[02:43:06.959 I] peer.cpp:1279: replica stored: 'n03_s098864.txt' (9.77 KiB) indexed; files=317563
+[02:43:06.960 I] peer.cpp:1279: replica stored: 'n11_s065505.txt' (9.77 KiB) indexed; files=317564
+[02:43:06.985 I] peer.cpp:1279: replica stored: 'n02_s062606.txt' (9.77 KiB) indexed; files=317565
+[02:43:06.985 I] peer.cpp:1279: replica stored: 'n02_s000130.txt' (9.77 KiB) indexed; files=317566
+[02:43:07.003 I] peer.cpp:1279: replica stored: 'n03_s094392.txt' (9.77 KiB) indexed; files=317567
+[02:43:07.101 I] peer.cpp:1279: replica stored: 'n03_s036966.txt' (9.77 KiB) indexed; files=317568
+[02:43:07.117 I] peer.cpp:1279: replica stored: 'n03_s019829.txt' (9.77 KiB) indexed; files=317569
+[02:43:07.157 I] peer.cpp:1279: replica stored: 'n03_s085930.txt' (9.77 KiB) indexed; files=317570
+[02:43:07.185 I] peer.cpp:1279: replica stored: 'n03_s011498.txt' (9.77 KiB) indexed; files=317571
+[02:43:07.192 I] peer.cpp:1279: replica stored: 'n03_s020345.txt' (9.77 KiB) indexed; files=317572
+[02:43:07.196 I] peer.cpp:1279: replica stored: 'n03_s096664.txt' (9.77 KiB) indexed; files=317573
+[02:43:07.196 I] peer.cpp:1279: replica stored: 'n11_s054691.txt' (9.77 KiB) indexed; files=317574
+[02:43:07.215 I] peer.cpp:1279: replica stored: 'n03_s083548.txt' (9.77 KiB) indexed; files=317575
+[02:43:07.220 I] peer.cpp:1279: replica stored: 'n03_s068922.txt' (9.77 KiB) indexed; files=317576
+[02:43:07.229 I] peer.cpp:1279: replica stored: 'n03_s037962.txt' (9.77 KiB) indexed; files=317577
+[02:43:07.247 I] peer.cpp:1279: replica stored: 'n03_s016413.txt' (9.77 KiB) indexed; files=317578
+[02:43:07.283 I] peer.cpp:1279: replica stored: 'n02_s067241.txt' (9.77 KiB) indexed; files=317579
+[02:43:07.283 I] peer.cpp:1279: replica stored: 'n02_s070933.txt' (9.77 KiB) indexed; files=317580
+[02:43:07.341 I] peer.cpp:1279: replica stored: 'n17_s015512.txt' (9.77 KiB) indexed; files=317581
+[02:43:07.341 I] peer.cpp:1279: replica stored: 'n17_s090468.txt' (9.77 KiB) indexed; files=317582
+[02:43:07.418 I] peer.cpp:1279: replica stored: 'n17_s047678.txt' (9.77 KiB) indexed; files=317583
+[02:43:07.419 I] peer.cpp:1279: replica stored: 'n17_s057432.txt' (9.77 KiB) indexed; files=317584
+[02:43:07.419 I] peer.cpp:1279: replica stored: 'n17_s035414.txt' (9.77 KiB) indexed; files=317585
+[02:43:07.420 I] peer.cpp:1279: replica stored: 'n17_s097960.txt' (9.77 KiB) indexed; files=317586
+[02:43:07.420 I] peer.cpp:1279: replica stored: 'n17_s003410.txt' (9.77 KiB) indexed; files=317587
+[02:43:07.534 I] peer.cpp:1279: replica stored: 'n03_s087064.txt' (9.77 KiB) indexed; files=317588
+[02:43:07.553 I] peer.cpp:1279: replica stored: 'n03_s097631.txt' (9.77 KiB) indexed; files=317589
+[02:43:07.609 I] peer.cpp:1279: replica stored: 'n03_s059333.txt' (9.77 KiB) indexed; files=317590
+[02:43:07.610 I] peer.cpp:1279: replica stored: 'n11_s047970.txt' (9.77 KiB) indexed; files=317591
+[02:43:07.616 I] peer.cpp:1279: replica stored: 'n03_s034685.txt' (9.77 KiB) indexed; files=317592
+[02:43:07.617 I] peer.cpp:1279: replica stored: 'n11_s060515.txt' (9.77 KiB) indexed; files=317593
+[02:43:07.676 I] peer.cpp:1279: replica stored: 'n17_s021858.txt' (9.77 KiB) indexed; files=317594
+[02:43:07.676 I] peer.cpp:1279: replica stored: 'n17_s034441.txt' (9.77 KiB) indexed; files=317595
+[02:43:07.733 I] peer.cpp:1279: replica stored: 'n03_s018636.txt' (9.77 KiB) indexed; files=317596
+[02:43:07.733 I] peer.cpp:1279: replica stored: 'n03_s088673.txt' (9.77 KiB) indexed; files=317597
+[02:43:07.793 I] peer.cpp:1279: replica stored: 'n03_s015221.txt' (9.77 KiB) indexed; files=317598
+[02:43:07.794 I] peer.cpp:1279: replica stored: 'n11_s025174.txt' (9.77 KiB) indexed; files=317599
+[02:43:07.794 I] peer.cpp:1279: replica stored: 'n11_s038583.txt' (9.77 KiB) indexed; files=317600
+[02:43:07.795 I] peer.cpp:1279: replica stored: 'n11_s014923.txt' (9.77 KiB) indexed; files=317601
+[02:43:07.803 I] peer.cpp:1279: replica stored: 'n03_s006845.txt' (9.77 KiB) indexed; files=317602
+[02:43:07.876 I] peer.cpp:1279: replica stored: 'n03_s002388.txt' (9.77 KiB) indexed; files=317603
+[02:43:07.877 I] peer.cpp:1279: replica stored: 'n17_s078485.txt' (9.77 KiB) indexed; files=317604
+[02:43:07.878 I] peer.cpp:1279: replica stored: 'n17_s023725.txt' (9.77 KiB) indexed; files=317605
+[02:43:07.937 I] peer.cpp:1279: replica stored: 'n03_s089780.txt' (9.77 KiB) indexed; files=317606
+[02:43:07.944 I] peer.cpp:1279: replica stored: 'n17_s089009.txt' (9.77 KiB) indexed; files=317607
+[02:43:07.965 I] peer.cpp:1279: replica stored: 'n17_s086376.txt' (9.77 KiB) indexed; files=317608
+[02:43:08.018 I] peer.cpp:1279: replica stored: 'n03_s012541.txt' (9.77 KiB) indexed; files=317609
+[02:43:08.019 I] peer.cpp:1279: replica stored: 'n11_s090031.txt' (9.77 KiB) indexed; files=317610
+[02:43:08.064 I] peer.cpp:1279: replica stored: 'n03_s058088.txt' (9.77 KiB) indexed; files=317611
+[02:43:08.129 I] peer.cpp:1279: replica stored: 'n03_s010231.txt' (9.77 KiB) indexed; files=317612
+[02:43:08.130 I] peer.cpp:1279: replica stored: 'n11_s025839.txt' (9.77 KiB) indexed; files=317613
+[02:43:08.130 I] peer.cpp:1279: replica stored: 'n11_s042847.txt' (9.77 KiB) indexed; files=317614
+[02:43:08.134 I] peer.cpp:1279: replica stored: 'n03_s075889.txt' (9.77 KiB) indexed; files=317615
+[02:43:08.224 I] peer.cpp:1279: replica stored: 'n03_s069386.txt' (9.77 KiB) indexed; files=317616
+[02:43:08.267 I] peer.cpp:1279: replica stored: 'n03_s051433.txt' (9.77 KiB) indexed; files=317617
+[02:43:08.272 I] peer.cpp:1279: replica stored: 'n03_s060674.txt' (9.77 KiB) indexed; files=317618
+[02:43:08.280 I] peer.cpp:1279: replica stored: 'n03_s035695.txt' (9.77 KiB) indexed; files=317619
+[02:43:08.283 I] peer.cpp:1279: replica stored: 'n03_s014519.txt' (9.77 KiB) indexed; files=317620
+[02:43:08.414 I] peer.cpp:1279: replica stored: 'n03_s059938.txt' (9.77 KiB) indexed; files=317621
+[02:43:08.415 I] peer.cpp:1279: replica stored: 'n17_s084617.txt' (9.77 KiB) indexed; files=317622
+[02:43:08.415 I] peer.cpp:1279: replica stored: 'n17_s064562.txt' (9.77 KiB) indexed; files=317623
+[02:43:08.489 I] peer.cpp:1279: replica stored: 'n03_s096785.txt' (9.77 KiB) indexed; files=317624
+[02:43:08.490 I] peer.cpp:1279: replica stored: 'n17_s059127.txt' (9.77 KiB) indexed; files=317625
+[02:43:08.573 I] peer.cpp:1279: replica stored: 'n02_s027061.txt' (9.77 KiB) indexed; files=317626
+[02:43:08.659 I] peer.cpp:1279: replica stored: 'n03_s035348.txt' (9.77 KiB) indexed; files=317627
+[02:43:08.671 I] peer.cpp:1279: replica stored: 'n03_s096347.txt' (9.77 KiB) indexed; files=317628
+[02:43:08.682 I] peer.cpp:1279: replica stored: 'n03_s009982.txt' (9.77 KiB) indexed; files=317629
+[02:43:08.683 I] peer.cpp:1279: replica stored: 'n11_s016477.txt' (9.77 KiB) indexed; files=317630
+[02:43:08.716 I] peer.cpp:1279: replica stored: 'n03_s092461.txt' (9.77 KiB) indexed; files=317631
+[02:43:08.731 I] peer.cpp:1279: replica stored: 'n03_s097557.txt' (9.77 KiB) indexed; files=317632
+[02:43:08.749 I] peer.cpp:1279: replica stored: 'n17_s070440.txt' (9.77 KiB) indexed; files=317633
+[02:43:08.754 I] peer.cpp:1279: replica stored: 'n02_s034869.txt' (9.77 KiB) indexed; files=317634
+[02:43:08.816 I] peer.cpp:1279: replica stored: 'n03_s073254.txt' (9.77 KiB) indexed; files=317635
+[02:43:08.817 I] peer.cpp:1279: replica stored: 'n11_s065358.txt' (9.77 KiB) indexed; files=317636
+[02:43:08.817 I] peer.cpp:1279: replica stored: 'n11_s017030.txt' (9.77 KiB) indexed; files=317637
+[02:43:08.818 I] peer.cpp:1279: replica stored: 'n11_s038895.txt' (9.77 KiB) indexed; files=317638
+[02:43:08.818 I] peer.cpp:1279: replica stored: 'n11_s077061.txt' (9.77 KiB) indexed; files=317639
+[02:43:08.828 I] peer.cpp:1279: replica stored: 'n03_s020709.txt' (9.77 KiB) indexed; files=317640
+[02:43:08.839 I] peer.cpp:1279: replica stored: 'n03_s069917.txt' (9.77 KiB) indexed; files=317641
+[02:43:08.872 I] peer.cpp:1279: replica stored: 'n03_s072715.txt' (9.77 KiB) indexed; files=317642
+[02:43:08.872 I] peer.cpp:1279: replica stored: 'n11_s028403.txt' (9.77 KiB) indexed; files=317643
+[02:43:08.894 I] peer.cpp:1279: replica stored: 'n02_s090175.txt' (9.77 KiB) indexed; files=317644
+[02:43:08.902 I] peer.cpp:1279: replica stored: 'n17_s078992.txt' (9.77 KiB) indexed; files=317645
+[02:43:08.902 I] peer.cpp:1279: replica stored: 'n17_s058599.txt' (9.77 KiB) indexed; files=317646
+[02:43:08.905 I] peer.cpp:1279: replica stored: 'n02_s083144.txt' (9.77 KiB) indexed; files=317647
+[02:43:08.908 I] peer.cpp:1279: replica stored: 'n02_s095275.txt' (9.77 KiB) indexed; files=317648
+[02:43:08.916 I] peer.cpp:1279: replica stored: 'n02_s060280.txt' (9.77 KiB) indexed; files=317649
+[02:43:08.917 I] peer.cpp:1279: replica stored: 'n02_s063032.txt' (9.77 KiB) indexed; files=317650
+[02:43:08.926 I] peer.cpp:1279: replica stored: 'n17_s034970.txt' (9.77 KiB) indexed; files=317651
+[02:43:08.960 I] peer.cpp:1279: replica stored: 'n03_s057927.txt' (9.77 KiB) indexed; files=317652
+[02:43:09.101 I] peer.cpp:1279: replica stored: 'n03_s047963.txt' (9.77 KiB) indexed; files=317653
+[02:43:09.124 I] peer.cpp:1279: replica stored: 'n03_s068351.txt' (9.77 KiB) indexed; files=317654
+[02:43:09.130 I] peer.cpp:1279: replica stored: 'n03_s069073.txt' (9.77 KiB) indexed; files=317655
+[02:43:09.132 I] peer.cpp:1279: replica stored: 'n03_s049892.txt' (9.77 KiB) indexed; files=317656
+[02:43:09.133 I] peer.cpp:1279: replica stored: 'n17_s012467.txt' (9.77 KiB) indexed; files=317657
+[02:43:09.138 I] peer.cpp:1279: replica stored: 'n03_s085797.txt' (9.77 KiB) indexed; files=317658
+[02:43:09.140 I] peer.cpp:1279: replica stored: 'n03_s025797.txt' (9.77 KiB) indexed; files=317659
+[02:43:09.141 I] peer.cpp:1279: replica stored: 'n17_s032393.txt' (9.77 KiB) indexed; files=317660
+[02:43:09.141 I] peer.cpp:1279: replica stored: 'n17_s042399.txt' (9.77 KiB) indexed; files=317661
+[02:43:09.151 I] peer.cpp:1279: replica stored: 'n03_s036813.txt' (9.77 KiB) indexed; files=317662
+[02:43:09.156 I] peer.cpp:1279: replica stored: 'n03_s087861.txt' (9.77 KiB) indexed; files=317663
+[02:43:09.265 I] peer.cpp:1279: replica stored: 'n03_s051476.txt' (9.77 KiB) indexed; files=317664
+[02:43:09.439 I] peer.cpp:1279: replica stored: 'n17_s065973.txt' (9.77 KiB) indexed; files=317665
+[02:43:09.481 I] peer.cpp:1279: replica stored: 'n03_s040826.txt' (9.77 KiB) indexed; files=317666
+[02:43:09.520 I] peer.cpp:1279: replica stored: 'n03_s010640.txt' (9.77 KiB) indexed; files=317667
+[02:43:09.560 I] peer.cpp:1279: replica stored: 'n03_s068918.txt' (9.77 KiB) indexed; files=317668
+[02:43:09.605 I] peer.cpp:1279: replica stored: 'n03_s065507.txt' (9.77 KiB) indexed; files=317669
+[02:43:09.606 I] peer.cpp:1279: replica stored: 'n11_s013698.txt' (9.77 KiB) indexed; files=317670
+[02:43:09.642 I] peer.cpp:1279: replica stored: 'n03_s005717.txt' (9.77 KiB) indexed; files=317671
+[02:43:09.642 I] peer.cpp:1279: replica stored: 'n11_s009936.txt' (9.77 KiB) indexed; files=317672
+[02:43:09.676 I] peer.cpp:1279: replica stored: 'n03_s063572.txt' (9.77 KiB) indexed; files=317673
+[02:43:09.677 I] peer.cpp:1279: replica stored: 'n02_s068455.txt' (9.77 KiB) indexed; files=317674
+[02:43:09.678 I] peer.cpp:1279: replica stored: 'n03_s097593.txt' (9.77 KiB) indexed; files=317675
+[02:43:09.682 I] peer.cpp:1279: replica stored: 'n03_s095229.txt' (9.77 KiB) indexed; files=317676
+[02:43:09.697 I] peer.cpp:1279: replica stored: 'n03_s061867.txt' (9.77 KiB) indexed; files=317677
+[02:43:12.834 W] peer.cpp:2036: peer shutting down
+##    (this console ran on vm4)
+
+## 4. Task 2 demo: HARD kill (SIGKILL) of the HUB vm02 - every leaf
+##    loses its only overlay link. A leaf console (vm05, holder of
+##    neither file) tries a query: the flood finds zero hits, and the
+##    ring fallback probes the designed placements over the DATA plane
+##    (overlay-only design: download ports are direct VM-to-VM).
+##    The "[client] lookup failed" line is visible in the capture:
+  kill issued 2026-10-23T08:43:18.700Z on vm02 (star hub)
+[02:48:46.306 W] peer.cpp:320: removed 7 stale .part files from /data/shared
+[02:48:46.563 I] local_index.hpp:84: local index loaded 320802 files from /data/shared
+[02:48:46.564 I] peer.cpp:116: journal loaded: 2 lines from /data/.p2p-repl.meta
+[02:48:46.620 I] peer.cpp:336: peer 5 initialised: ip=192.168.77.105 msg=51000 control=51001 dl=51002 top=star neighbours=1 files=320802 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] lookup failed for 'n12_s000000.txt'; ring fallback probed 3, found 2
+[client] query 'n12_s000000.txt' -> 2 hit(s): 192.168.77.116:51002, 192.168.77.117:51002 [8005 ms]
+  holders for 'n12_s000000.txt':
+   #1 192.168.77.116:51002
+   #2 192.168.77.117:51002
+[02:48:57.632 I] peer.cpp:888: ring fallback: 'n12_s000000.txt' located at 2 probed holder(s)
+[02:48:59.982 I] peer.cpp:1279: replica stored: 'n06_s056166.txt' (9.77 KiB) indexed; files=320803
+[02:48:59.988 I] peer.cpp:1279: replica stored: 'n06_s096799.txt' (9.77 KiB) indexed; files=320804
+[02:48:59.999 I] peer.cpp:1279: replica stored: 'n06_s043065.txt' (9.77 KiB) indexed; files=320805
+[02:49:00.032 I] peer.cpp:1279: replica stored: 'n06_s026796.txt' (9.77 KiB) indexed; files=320806
+[02:49:00.033 I] peer.cpp:1279: replica stored: 'n06_s029973.txt' (9.77 KiB) indexed; files=320807
+[02:49:00.041 I] peer.cpp:1279: replica stored: 'n06_s072528.txt' (9.77 KiB) indexed; files=320808
+[02:49:00.048 I] peer.cpp:1279: replica stored: 'n06_s046453.txt' (9.77 KiB) indexed; files=320809
+[02:49:00.123 I] peer.cpp:1279: replica stored: 'n06_s034311.txt' (9.77 KiB) indexed; files=320810
+[02:49:00.131 I] peer.cpp:1279: replica stored: 'n06_s068369.txt' (9.77 KiB) indexed; files=320811
+[02:49:00.151 I] peer.cpp:1279: replica stored: 'n06_s035183.txt' (9.77 KiB) indexed; files=320812
+[02:49:00.164 I] peer.cpp:1279: replica stored: 'n06_s021999.txt' (9.77 KiB) indexed; files=320813
+[02:49:00.170 I] peer.cpp:1279: replica stored: 'n06_s035356.txt' (9.77 KiB) indexed; files=320814
+[02:49:00.229 I] peer.cpp:1279: replica stored: 'n06_s073075.txt' (9.77 KiB) indexed; files=320815
+[02:49:00.237 I] peer.cpp:1279: replica stored: 'n06_s039262.txt' (9.77 KiB) indexed; files=320816
+[02:49:00.242 I] peer.cpp:1279: replica stored: 'n06_s065375.txt' (9.77 KiB) indexed; files=320817
+[02:49:00.249 I] peer.cpp:1279: replica stored: 'n06_s097352.txt' (9.77 KiB) indexed; files=320818
+[02:49:00.342 I] peer.cpp:1279: replica stored: 'n06_s068729.txt' (9.77 KiB) indexed; files=320819
+[02:49:00.342 I] peer.cpp:1279: replica stored: 'n06_s063988.txt' (9.77 KiB) indexed; files=320820
+[02:49:00.397 I] peer.cpp:1279: replica stored: 'n06_s077934.txt' (9.77 KiB) indexed; files=320821
+[02:49:00.625 I] peer.cpp:1279: replica stored: 'n06_s072021.txt' (9.77 KiB) indexed; files=320822
+[02:49:00.637 I] peer.cpp:1279: replica stored: 'n06_s056478.txt' (9.77 KiB) indexed; files=320823
+[02:49:00.666 I] peer.cpp:1279: replica stored: 'n06_s057855.txt' (9.77 KiB) indexed; files=320824
+[02:49:00.686 I] peer.cpp:1279: replica stored: 'n06_s004495.txt' (9.77 KiB) indexed; files=320825
+[02:49:00.717 I] peer.cpp:1279: replica stored: 'n06_s003704.txt' (9.77 KiB) indexed; files=320826
+[02:49:00.737 I] peer.cpp:1279: replica stored: 'n06_s068765.txt' (9.77 KiB) indexed; files=320827
+[02:49:00.786 I] peer.cpp:1279: replica stored: 'n06_s003847.txt' (9.77 KiB) indexed; files=320828
+[02:49:00.797 I] peer.cpp:1279: replica stored: 'n06_s047289.txt' (9.77 KiB) indexed; files=320829
+[02:49:00.809 I] peer.cpp:1279: replica stored: 'n06_s067661.txt' (9.77 KiB) indexed; files=320830
+[02:49:00.817 I] peer.cpp:1279: replica stored: 'n06_s041618.txt' (9.77 KiB) indexed; files=320831
+[02:49:00.825 I] peer.cpp:1279: replica stored: 'n06_s034562.txt' (9.77 KiB) indexed; files=320832
+[02:49:00.830 I] peer.cpp:1279: replica stored: 'n06_s013785.txt' (9.77 KiB) indexed; files=320833
+[02:49:00.830 I] peer.cpp:1279: replica stored: 'n06_s057554.txt' (9.77 KiB) indexed; files=320834
+[02:49:00.841 I] peer.cpp:1279: replica stored: 'n06_s018018.txt' (9.77 KiB) indexed; files=320835
+[02:49:00.842 I] peer.cpp:1279: replica stored: 'n06_s034328.txt' (9.77 KiB) indexed; files=320836
+[02:49:00.842 I] peer.cpp:1279: replica stored: 'n06_s093244.txt' (9.77 KiB) indexed; files=320837
+[02:49:00.854 I] peer.cpp:1279: replica stored: 'n06_s042570.txt' (9.77 KiB) indexed; files=320838
+[02:49:00.863 I] peer.cpp:1279: replica stored: 'n06_s052412.txt' (9.77 KiB) indexed; files=320839
+[02:49:00.982 I] peer.cpp:1279: replica stored: 'n06_s076209.txt' (9.77 KiB) indexed; files=320840
+[02:49:00.990 I] peer.cpp:1279: replica stored: 'n06_s074041.txt' (9.77 KiB) indexed; files=320841
+[02:49:00.996 I] peer.cpp:1279: replica stored: 'n06_s078166.txt' (9.77 KiB) indexed; files=320842
+[02:49:01.111 I] peer.cpp:1279: replica stored: 'n06_s050191.txt' (9.77 KiB) indexed; files=320843
+[02:49:01.114 I] peer.cpp:1279: replica stored: 'n06_s052948.txt' (9.77 KiB) indexed; files=320844
+[02:49:01.121 I] peer.cpp:1279: replica stored: 'n06_s034760.txt' (9.77 KiB) indexed; files=320845
+[02:49:01.125 I] peer.cpp:1279: replica stored: 'n06_s009948.txt' (9.77 KiB) indexed; files=320846
+[02:49:01.130 I] peer.cpp:1279: replica stored: 'n06_s080143.txt' (9.77 KiB) indexed; files=320847
+[02:49:01.157 I] peer.cpp:1279: replica stored: 'n06_s094577.txt' (9.77 KiB) indexed; files=320848
+[02:49:01.174 I] peer.cpp:1279: replica stored: 'n06_s000396.txt' (9.77 KiB) indexed; files=320849
+[02:49:01.273 I] peer.cpp:1279: replica stored: 'n06_s068642.txt' (9.77 KiB) indexed; files=320850
+[02:49:01.280 I] peer.cpp:1279: replica stored: 'n06_s042426.txt' (9.77 KiB) indexed; files=320851
+[02:49:01.287 I] peer.cpp:1279: replica stored: 'n06_s060718.txt' (9.77 KiB) indexed; files=320852
+[02:49:01.452 I] peer.cpp:1279: replica stored: 'n06_s087216.txt' (9.77 KiB) indexed; files=320853
+[02:49:01.458 I] peer.cpp:1279: replica stored: 'n06_s010195.txt' (9.77 KiB) indexed; files=320854
+[02:49:01.462 I] peer.cpp:1279: replica stored: 'n06_s043357.txt' (9.77 KiB) indexed; files=320855
+[02:49:01.520 I] peer.cpp:1279: replica stored: 'n06_s086505.txt' (9.77 KiB) indexed; files=320856
+[02:49:01.532 I] peer.cpp:1279: replica stored: 'n06_s056434.txt' (9.77 KiB) indexed; files=320857
+[02:49:01.538 I] peer.cpp:1279: replica stored: 'n06_s074816.txt' (9.77 KiB) indexed; files=320858
+[02:49:01.558 I] peer.cpp:1279: replica stored: 'n06_s050623.txt' (9.77 KiB) indexed; files=320859
+[02:49:01.591 I] peer.cpp:1279: replica stored: 'n06_s061483.txt' (9.77 KiB) indexed; files=320860
+[02:49:01.610 I] peer.cpp:1279: replica stored: 'n06_s012311.txt' (9.77 KiB) indexed; files=320861
+[02:49:01.614 I] peer.cpp:1279: replica stored: 'n06_s010959.txt' (9.77 KiB) indexed; files=320862
+[02:49:01.619 I] peer.cpp:1279: replica stored: 'n06_s054906.txt' (9.77 KiB) indexed; files=320863
+[02:49:01.626 I] peer.cpp:1279: replica stored: 'n06_s062073.txt' (9.77 KiB) indexed; files=320864
+[02:49:01.630 I] peer.cpp:1279: replica stored: 'n06_s029559.txt' (9.77 KiB) indexed; files=320865
+[02:49:01.644 I] peer.cpp:1279: replica stored: 'n06_s059978.txt' (9.77 KiB) indexed; files=320866
+[02:49:05.414 I] peer.cpp:1279: replica stored: 'n06_s085153.txt' (9.77 KiB) indexed; files=320867
+[02:49:05.422 I] peer.cpp:1279: replica stored: 'n06_s097514.txt' (9.77 KiB) indexed; files=320868
+[02:49:05.455 I] peer.cpp:1279: replica stored: 'n06_s050380.txt' (9.77 KiB) indexed; files=320869
+[02:49:05.586 I] peer.cpp:1279: replica stored: 'n06_s008279.txt' (9.77 KiB) indexed; files=320870
+[02:49:05.590 I] peer.cpp:1279: replica stored: 'n06_s043007.txt' (9.77 KiB) indexed; files=320871
+[02:49:05.618 I] peer.cpp:1279: replica stored: 'n06_s058559.txt' (9.77 KiB) indexed; files=320872
+[02:49:05.623 I] peer.cpp:1279: replica stored: 'n06_s029353.txt' (9.77 KiB) indexed; files=320873
+[02:49:05.633 I] peer.cpp:1279: replica stored: 'n06_s051185.txt' (9.77 KiB) indexed; files=320874
+[client] lookup failed for 'n12_s000000.txt'; ring fallback probed 3, found 2
+[02:49:05.638 I] peer.cpp:888: ring fallback: 'n12_s000000.txt' located at 2 probed holder(s)
+[02:49:05.640 I] peer.cpp:1279: replica stored: 'n06_s001104.txt' (9.77 KiB) indexed; files=320875
+display file 'n12_s000000.txt' (9.77 KiB from 192.168.77.116:51002: download 2 ms, search 8006 ms)
+[02:49:05.641 W] peer.cpp:2036: peer shutting down
+[02:49:05.646 I] peer.cpp:1279: replica stored: 'n06_s008107.txt' (9.77 KiB) indexed; files=320876
+
+###################### MESH DEPLOYMENT ##########################
+## mesh: 4x4 grid (vm02 at (row0,col0) ... vm17 at (row3,col3)),
+## TTL-scoped flood (TTL=8 covers the diameter 6).
+## 1. p2p ping --target 127.0.0.1:51001, every peer:
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=299988 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300013 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300026 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=300031 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300120 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=300104 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=299984 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300037 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300062 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=300050 repl(push=0 skip=200026 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=4 files=300068 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300003 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=299914 repl(push=0 skip=200024 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=299990 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=3 files=300094 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=2 files=300030 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+## 2. --cli console on vm17 = the OPPOSITE CORNER from the owner
+##    vm02: target files n02_s000002.txt / n02_b0.bin, both with
+##    designed holders {2,3,4} - grid distance from vm17 to holders
+##    is 6/5/4 hops, so the console is >= 2 hops from every copy.
+##    Hit list shows the 3 designed copies.
+[02:56:36.577 I] local_index.hpp:84: local index loaded 300030 files from /data/shared
+[02:56:36.621 I] peer.cpp:336: peer 17 initialised: ip=192.168.77.117 msg=51000 control=51001 dl=51002 top=mesh neighbours=2 files=300030 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[02:56:37.297 I] peer.cpp:598: neighbour 192.168.77.116:51000 channel established (inbound, node 16)
+[02:56:37.421 I] peer.cpp:598: neighbour 192.168.77.113:51000 channel established (inbound, node 13)
+peer 17: files=300030 neighbours_conn=2 routes=0 pending=0
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[client] query 'n02_s000002.txt' -> 3 hit(s): 192.168.77.104:51002, 192.168.77.103:51002, 192.168.77.102:51002 [303 ms]
+  holders for 'n02_s000002.txt':
+   #1 192.168.77.104:51002
+   #2 192.168.77.103:51002
+   #3 192.168.77.102:51002
+display file 'n02_s000002.txt' (9.77 KiB from 192.168.77.104:51002: download 3 ms, search 2 ms)
+display file 'n02_b0.bin' (100.00 MiB from 192.168.77.104:51002: download 2444 ms, search 2 ms)
+[02:56:40.313 W] peer.cpp:2036: peer shutting down
+
+## 3. HARD kill (SIGKILL) of vm02, the corner that owns BOTH files and
+##    one of their designed placements. The grid re-converges both
+##    names to 3 live copies; the new console sits on corner vm14,
+##    >= 2 hops from every surviving holder, and obtains BOTH files
+##    (small + 100 MiB) across the grid:
+  kill issued 2026-10-23T08:56:43.573Z on vm02
+[03:03:26.689 I] local_index.hpp:84: local index loaded 300093 files from /data/shared
+[client] query 'n02_s000002.txt' -> 2 hit(s): 192.168.77.103:51002, 192.168.77.104:51002 [303 ms]
+  holders for 'n02_s000002.txt':
+   #1 192.168.77.103:51002
+   #2 192.168.77.104:51002
+[03:03:26.690 I] peer.cpp:116: journal loaded: 2 lines from /data/.p2p-repl.meta
+[03:03:26.734 I] peer.cpp:336: peer 14 initialised: ip=192.168.77.114 msg=51000 control=51001 dl=51002 top=mesh neighbours=2 files=300093 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[03:03:26.738 I] peer.cpp:496: neighbour 192.168.77.115:51000 channel established (outbound dial)
+[03:03:27.175 I] peer.cpp:598: neighbour 192.168.77.110:51000 channel established (inbound, node 10)
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[03:03:40.485 I] peer.cpp:1279: replica stored: 'n17_s056398.txt' (9.77 KiB) indexed; files=300094
+[03:03:40.499 I] peer.cpp:1279: replica stored: 'n17_s026915.txt' (9.77 KiB) indexed; files=300095
+[03:03:40.606 I] peer.cpp:1279: replica stored: 'n06_s013582.txt' (9.77 KiB) indexed; files=300096
+[03:03:55.595 I] peer.cpp:1279: replica stored: 'n17_s086086.txt' (9.77 KiB) indexed; files=300097
+[03:03:55.640 I] peer.cpp:1279: replica stored: 'n11_s060074.txt' (9.77 KiB) indexed; files=300098
+[03:03:56.750 I] peer.cpp:1884: status: neighbours_conn=2 files=300098 routes=2 pending=0
+[03:03:57.176 I] peer.cpp:1279: replica stored: 'n17_s026562.txt' (9.77 KiB) indexed; files=300099
+[03:04:03.951 I] peer.cpp:1279: replica stored: 'n06_s001167.txt' (9.77 KiB) indexed; files=300100
+[03:04:03.963 I] peer.cpp:1279: replica stored: 'n06_s011654.txt' (9.77 KiB) indexed; files=300101
+[03:04:04.126 I] peer.cpp:1279: replica stored: 'n17_s091887.txt' (9.77 KiB) indexed; files=300102
+[03:04:04.306 I] peer.cpp:1279: replica stored: 'n17_s007270.txt' (9.77 KiB) indexed; files=300103
+[03:04:04.480 I] peer.cpp:1279: replica stored: 'n09_s070119.txt' (9.77 KiB) indexed; files=300104
+[03:04:04.492 I] peer.cpp:1279: replica stored: 'n09_s069852.txt' (9.77 KiB) indexed; files=300105
+[03:04:05.470 I] peer.cpp:1279: replica stored: 'n17_s016560.txt' (9.77 KiB) indexed; files=300106
+[03:04:05.478 I] peer.cpp:1279: replica stored: 'n17_s010629.txt' (9.77 KiB) indexed; files=300107
+[03:04:26.763 I] peer.cpp:1884: status: neighbours_conn=2 files=300107 routes=0 pending=0
+[03:04:45.533 I] peer.cpp:1279: replica stored: 'n17_s021686.txt' (9.77 KiB) indexed; files=300108
+[03:04:45.546 I] peer.cpp:1279: replica stored: 'n17_s081796.txt' (9.77 KiB) indexed; files=300109
+[03:04:46.299 I] peer.cpp:1279: replica stored: 'n06_s075740.txt' (9.77 KiB) indexed; files=300110
+[03:04:46.303 I] peer.cpp:1279: replica stored: 'n06_s085035.txt' (9.77 KiB) indexed; files=300111
+[03:04:46.402 I] peer.cpp:1279: replica stored: 'n17_s077457.txt' (9.77 KiB) indexed; files=300112
+[03:04:46.569 I] peer.cpp:1279: replica stored: 'n17_s039928.txt' (9.77 KiB) indexed; files=300113
+[03:04:46.663 I] peer.cpp:1279: replica stored: 'n06_s096888.txt' (9.77 KiB) indexed; files=300114
+[03:04:48.919 I] peer.cpp:1279: replica stored: 'n17_s062940.txt' (9.77 KiB) indexed; files=300115
+[03:04:48.943 I] peer.cpp:1279: replica stored: 'n17_s039027.txt' (9.77 KiB) indexed; files=300116
+[03:04:48.943 I] peer.cpp:1279: replica stored: 'n13_s033757.txt' (9.77 KiB) indexed; files=300117
+[03:04:49.248 I] peer.cpp:1279: replica stored: 'n17_s080980.txt' (9.77 KiB) indexed; files=300118
+[03:04:52.112 I] peer.cpp:1279: replica stored: 'n17_s076067.txt' (9.77 KiB) indexed; files=300119
+[03:04:52.135 I] peer.cpp:1279: replica stored: 'n17_s032544.txt' (9.77 KiB) indexed; files=300120
+[03:04:52.148 I] peer.cpp:1279: replica stored: 'n17_s093366.txt' (9.77 KiB) indexed; files=300121
+[03:04:52.198 I] peer.cpp:1279: replica stored: 'n17_s036623.txt' (9.77 KiB) indexed; files=300122
+[03:04:52.224 I] peer.cpp:1279: replica stored: 'n17_s029664.txt' (9.77 KiB) indexed; files=300123
+[03:04:52.225 I] peer.cpp:1279: replica stored: 'n17_s035694.txt' (9.77 KiB) indexed; files=300124
+[03:04:52.235 I] peer.cpp:1279: replica stored: 'n06_s061165.txt' (9.77 KiB) indexed; files=300125
+[03:04:56.775 I] peer.cpp:1884: status: neighbours_conn=2 files=300125 routes=0 pending=0
+[03:05:02.396 I] peer.cpp:1279: replica stored: 'n16_s008614.txt' (9.77 KiB) indexed; files=300126
+[03:05:02.403 I] peer.cpp:1279: replica stored: 'n16_s073612.txt' (9.77 KiB) indexed; files=300127
+[03:05:02.404 I] peer.cpp:1279: replica stored: 'n16_s098343.txt' (9.77 KiB) indexed; files=300128
+[03:05:02.653 I] peer.cpp:1279: replica stored: 'n17_s084344.txt' (9.77 KiB) indexed; files=300129
+[03:05:02.653 I] peer.cpp:1279: replica stored: 'n10_s001764.txt' (9.77 KiB) indexed; files=300130
+[03:05:02.654 I] peer.cpp:1279: replica stored: 'n17_s080312.txt' (9.77 KiB) indexed; files=300131
+[03:05:02.781 I] peer.cpp:1279: replica stored: 'n10_s017055.txt' (9.77 KiB) indexed; files=300132
+[03:05:06.131 I] peer.cpp:1279: replica stored: 'n10_s048411.txt' (9.77 KiB) indexed; files=300133
+[03:05:06.147 I] peer.cpp:1279: replica stored: 'n17_s015531.txt' (9.77 KiB) indexed; files=300134
+[03:05:21.118 I] peer.cpp:1279: replica stored: 'n17_s071818.txt' (9.77 KiB) indexed; files=300135
+[03:05:21.220 I] peer.cpp:1279: replica stored: 'n17_s036895.txt' (9.77 KiB) indexed; files=300136
+[03:05:21.239 I] peer.cpp:1279: replica stored: 'n10_s050605.txt' (9.77 KiB) indexed; files=300137
+[03:05:26.790 I] peer.cpp:1884: status: neighbours_conn=2 files=300137 routes=0 pending=0
+[03:05:43.372 I] peer.cpp:1279: replica stored: 'n16_s071809.txt' (9.77 KiB) indexed; files=300138
+[03:05:44.132 I] peer.cpp:1279: replica stored: 'n17_s033930.txt' (9.77 KiB) indexed; files=300139
+[03:05:44.156 I] peer.cpp:1279: replica stored: 'n17_s090436.txt' (9.77 KiB) indexed; files=300140
+[03:05:48.995 I] peer.cpp:1279: replica stored: 'n17_s029422.txt' (9.77 KiB) indexed; files=300141
+[03:05:48.996 I] peer.cpp:1279: replica stored: 'n17_s019605.txt' (9.77 KiB) indexed; files=300142
+[03:05:53.014 I] peer.cpp:1279: replica stored: 'n17_s045150.txt' (9.77 KiB) indexed; files=300143
+[03:05:53.062 I] peer.cpp:1279: replica stored: 'n13_s089521.txt' (9.77 KiB) indexed; files=300144
+[03:05:53.835 I] peer.cpp:1279: replica stored: 'n17_s055097.txt' (9.77 KiB) indexed; files=300145
+[03:05:54.028 I] peer.cpp:1279: replica stored: 'n09_s093974.txt' (9.77 KiB) indexed; files=300146
+[03:05:56.805 I] peer.cpp:1884: status: neighbours_conn=2 files=300146 routes=0 pending=0
+[03:06:03.311 I] peer.cpp:1279: replica stored: 'n09_s098944.txt' (9.77 KiB) indexed; files=300147
+[03:06:03.381 I] peer.cpp:1279: replica stored: 'n17_s073031.txt' (9.77 KiB) indexed; files=300148
+[03:06:03.389 I] peer.cpp:1279: replica stored: 'n09_s057246.txt' (9.77 KiB) indexed; files=300149
+[03:06:04.195 I] peer.cpp:1279: replica stored: 'n17_s092028.txt' (9.77 KiB) indexed; files=300150
+[03:06:04.333 I] peer.cpp:1279: replica stored: 'n17_s030550.txt' (9.77 KiB) indexed; files=300151
+[03:06:04.376 I] peer.cpp:1279: replica stored: 'n13_s053364.txt' (9.77 KiB) indexed; files=300152
+[03:06:26.819 I] peer.cpp:1884: status: neighbours_conn=2 files=300152 routes=0 pending=0
+[03:06:47.151 I] peer.cpp:1279: replica stored: 'n17_s033771.txt' (9.77 KiB) indexed; files=300153
+[03:06:47.157 I] peer.cpp:1279: replica stored: 'n17_s088622.txt' (9.77 KiB) indexed; files=300154
+[03:06:56.832 I] peer.cpp:1884: status: neighbours_conn=2 files=300154 routes=0 pending=0
+[03:06:57.142 I] peer.cpp:1279: replica stored: 'n10_s048763.txt' (9.77 KiB) indexed; files=300155
+[03:06:57.142 I] peer.cpp:1279: replica stored: 'n10_s013200.txt' (9.77 KiB) indexed; files=300156
+[03:06:57.201 I] peer.cpp:1279: replica stored: 'n17_s080887.txt' (9.77 KiB) indexed; files=300157
+[03:06:57.213 I] peer.cpp:1279: replica stored: 'n17_s064884.txt' (9.77 KiB) indexed; files=300158
+[03:06:57.224 I] peer.cpp:1279: replica stored: 'n10_s070108.txt' (9.77 KiB) indexed; files=300159
+[03:06:59.047 I] peer.cpp:1279: replica stored: 'n17_s026508.txt' (9.77 KiB) indexed; files=300160
+[03:06:59.047 I] peer.cpp:1279: replica stored: 'n17_s082331.txt' (9.77 KiB) indexed; files=300161
+[03:06:59.048 I] peer.cpp:1279: replica stored: 'n13_s049309.txt' (9.77 KiB) indexed; files=300162
+[03:07:01.917 I] peer.cpp:1279: replica stored: 'n17_s046431.txt' (9.77 KiB) indexed; files=300163
+[03:07:01.923 I] peer.cpp:1279: replica stored: 'n17_s044436.txt' (9.77 KiB) indexed; files=300164
+[03:07:01.956 I] peer.cpp:1279: replica stored: 'n17_s040322.txt' (9.77 KiB) indexed; files=300165
+[03:07:01.979 I] peer.cpp:1279: replica stored: 'n17_s063945.txt' (9.77 KiB) indexed; files=300166
+[03:07:02.049 I] peer.cpp:1279: replica stored: 'n17_s052192.txt' (9.77 KiB) indexed; files=300167
+[03:07:04.866 I] peer.cpp:1279: replica stored: 'n17_s079128.txt' (9.77 KiB) indexed; files=300168
+[03:07:04.889 I] peer.cpp:1279: replica stored: 'n17_s048941.txt' (9.77 KiB) indexed; files=300169
+[03:07:04.933 I] peer.cpp:1279: replica stored: 'n17_s044348.txt' (9.77 KiB) indexed; files=300170
+[03:07:04.936 I] peer.cpp:1279: replica stored: 'n17_s079808.txt' (9.77 KiB) indexed; files=300171
+[03:07:05.136 I] peer.cpp:1279: replica stored: 'n11_s041714.txt' (9.77 KiB) indexed; files=300172
+[03:07:05.193 I] peer.cpp:1279: replica stored: 'n11_s077092.txt' (9.77 KiB) indexed; files=300173
+display file 'n02_s000002.txt' (9.77 KiB from 192.168.77.103:51002: download 232993 ms, search 2 ms)
+display file 'n02_b0.bin' (100.00 MiB from 192.168.77.104:51002: download 221 ms, search 5 ms)
+peer 14: files=300173 neighbours_conn=2 routes=1 pending=0
+[03:07:20.728 W] peer.cpp:2036: peer shutting down
+
+## ================= Known limitations ==========================
+## (verbatim from readme.txt section 8 - the two documents are kept
+## in sync; scripts/make-output3.sh re-reads the readme at capture
+## time so the copy can never drift.)
+8. KNOWN LIMITATIONS / KNOWN-NOT-WORKING CASES
+----------------------------------------------
+  * If ALL copies of a file die simultaneously the file is lost
+    (that is the replication factor by design).  Queries then report
+    zero hits honestly (no fabricated hits anywhere); the failover
+    audit's bench-name-missing negative control demonstrates it.
+  * Killing the star hub partitions the leaves from each other (a
+    mandated topology, so this is documented rather than fixed:
+    leaves keep serving their own files; replication continues
+    through the ring roster, which is independent of the flood
+    topology).  A zero-hit leaf query then falls back to probing
+    the file's ring holders directly (ring_fallback=1), so obtains
+    of a dead hub's files still succeed across the partition --
+    demonstrated in output.txt (star section).
+  * Killing the central index no longer sinks lookups either: on an
+    RPC failure or a zero-hit answer the central-mode query probes
+    the file's ring holders + placement journals (same fallback).
+    Index restarts heal themselves: every peer's index client
+    re-registers within ~15 s of a dropped connection (the index
+    log shows the 'node N registering' lines).  Until a peer
+    re-registers the index view is stale; a CLI rescan re-pushes
+    the list immediately.
+  * Owner attribution for arbitrary-named files (names that do not
+    follow the nNN_* naming) comes from an append-only per-VM
+    journal (.p2p-repl.meta next to data_dir; journalCompact trims
+    it after GC).  Deleting that journal on every copy AND
+    hard-killing all owners of the name makes it unrecoverable;
+    names following the owner-prefix naming self-heal from the FNV
+    ownership rule alone.
+  * User queries time out after query_timeout_ms (default 8 s);
+    a flooded query also stops growing at the configured TTL.
+    A fallback probe that kicks in prints the '[client] lookup
+    failed ... ring fallback probed N, found M' line.
+  * Renaming/moving files inside data_dir while a peer runs: the
+    index is refreshed by the janitor rescan (~10 s) or immediately
+    by the CLI 'rescan' command; an in-flight obtain of a removed
+    file fails cleanly (retries the next hit).
+  * keep_downloads=1 republishes obtained files into the local index;
+    experiments ran with keep_downloads=0.
+
+## =============== end Known limitations ========================

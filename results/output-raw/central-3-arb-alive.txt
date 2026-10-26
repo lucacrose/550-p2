@@ -1,0 +1,15 @@
+[02:15:08.915 I] local_index.hpp:84: local index loaded 301323 files from /data/shared
+[02:15:08.915 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:15:08.965 I] peer.cpp:336: peer 10 initialised: ip=192.168.77.110 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=301323 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+peer 10: files=301323 neighbours_conn=0 routes=0 pending=0
+[client] query 'out-arb-1m.bin' -> 3 hit(s): 192.168.77.111:51002, 192.168.77.115:51002, 192.168.77.116:51002 [6 ms]
+  holders for 'out-arb-1m.bin':
+   #1 192.168.77.111:51002
+   #2 192.168.77.115:51002
+   #3 192.168.77.116:51002
+display file 'out-arb-1m.bin' (1.00 MiB from 192.168.77.111:51002: download 7 ms, search 0 ms)
+display file 'out-arb-40m.bin' (40.00 MiB from 192.168.77.106:51002: download 441 ms, search 0 ms)
+[02:15:09.491 W] peer.cpp:2036: peer shutting down
+[02:15:09.674 I] index_client.cpp:49: registered 301323 files with index server (ip 192.168.77.110 dport 51002)
+[02:15:09.674 W] index_client.cpp:138: index connection lost; re-registering

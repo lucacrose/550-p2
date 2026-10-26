@@ -1,0 +1,68 @@
+[02:22:33.719 W] peer.cpp:320: removed 44 stale .part files from /data/shared
+[client] query 'out-arb-1m.bin' -> 2 hit(s): 192.168.77.116:51002, 192.168.77.115:51002 [3 ms]
+  holders for 'out-arb-1m.bin':
+   #1 192.168.77.116:51002
+   #2 192.168.77.115:51002
+display file 'out-arb-1m.bin' (1.00 MiB from 192.168.77.116:51002: download 9 ms, search 4 ms)
+[02:22:33.997 I] local_index.hpp:84: local index loaded 335048 files from /data/shared
+[02:22:33.998 I] peer.cpp:116: journal loaded: 1 lines from /data/.p2p-repl.meta
+[02:22:34.062 I] peer.cpp:336: peer 12 initialised: ip=192.168.77.112 msg=51000 control=51001 dl=51002 top=central neighbours=0 files=335048 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[02:22:34.181 I] peer.cpp:1279: replica stored: 'n02_s014628.txt' (9.77 KiB) indexed; files=335049
+[02:22:34.203 I] peer.cpp:1279: replica stored: 'n02_s089349.txt' (9.77 KiB) indexed; files=335050
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s004706.txt' (9.77 KiB) indexed; files=335051
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s020313.txt' (9.77 KiB) indexed; files=335052
+[02:22:34.217 I] peer.cpp:1279: replica stored: 'n02_s075207.txt' (9.77 KiB) indexed; files=335053
+[02:22:34.225 I] peer.cpp:1279: replica stored: 'n03_s034021.txt' (9.77 KiB) indexed; files=335054
+[02:22:34.226 I] peer.cpp:1279: replica stored: 'n02_s023006.txt' (9.77 KiB) indexed; files=335055
+[02:22:34.234 I] peer.cpp:1279: replica stored: 'n02_s044030.txt' (9.77 KiB) indexed; files=335056
+[02:22:34.234 I] peer.cpp:1279: replica stored: 'n02_s014211.txt' (9.77 KiB) indexed; files=335057
+[02:22:34.262 I] peer.cpp:1279: replica stored: 'n02_s063929.txt' (9.77 KiB) indexed; files=335058
+[02:22:34.266 I] peer.cpp:1279: replica stored: 'n02_s094358.txt' (9.77 KiB) indexed; files=335059
+[02:22:34.267 I] peer.cpp:1279: replica stored: 'n07_s081458.txt' (9.77 KiB) indexed; files=335060
+[02:22:34.280 I] peer.cpp:1279: replica stored: 'n02_s050718.txt' (9.77 KiB) indexed; files=335061
+[02:22:34.293 I] peer.cpp:1279: replica stored: 'n05_s088213.txt' (9.77 KiB) indexed; files=335062
+[02:22:34.329 I] peer.cpp:1279: replica stored: 'n02_s005356.txt' (9.77 KiB) indexed; files=335063
+[02:22:34.335 I] peer.cpp:1279: replica stored: 'n03_s062336.txt' (9.77 KiB) indexed; files=335064
+[02:22:34.341 I] peer.cpp:1279: replica stored: 'n05_s008059.txt' (9.77 KiB) indexed; files=335065
+[02:22:34.350 I] peer.cpp:1279: replica stored: 'n05_s034197.txt' (9.77 KiB) indexed; files=335066
+[02:22:34.360 I] peer.cpp:1279: replica stored: 'n03_s069034.txt' (9.77 KiB) indexed; files=335067
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s050527.txt' (9.77 KiB) indexed; files=335068
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s085716.txt' (9.77 KiB) indexed; files=335069
+[02:22:34.368 I] peer.cpp:1279: replica stored: 'n02_s040333.txt' (9.77 KiB) indexed; files=335070
+[02:22:34.438 I] peer.cpp:1279: replica stored: 'n03_s052021.txt' (9.77 KiB) indexed; files=335071
+[02:22:34.445 I] peer.cpp:1279: replica stored: 'n03_s043395.txt' (9.77 KiB) indexed; files=335072
+[02:22:34.447 I] peer.cpp:1279: replica stored: 'n05_s041463.txt' (9.77 KiB) indexed; files=335073
+[02:22:34.457 I] peer.cpp:1279: replica stored: 'n03_s089461.txt' (9.77 KiB) indexed; files=335074
+[02:22:34.469 I] peer.cpp:1279: replica stored: 'n03_s050197.txt' (9.77 KiB) indexed; files=335075
+[02:22:34.505 I] peer.cpp:1279: replica stored: 'n03_s076904.txt' (9.77 KiB) indexed; files=335076
+[02:22:34.511 I] peer.cpp:1279: replica stored: 'n03_s064042.txt' (9.77 KiB) indexed; files=335077
+[02:22:34.521 I] peer.cpp:1279: replica stored: 'n02_s076156.txt' (9.77 KiB) indexed; files=335078
+[02:22:34.542 I] peer.cpp:1279: replica stored: 'n02_s026672.txt' (9.77 KiB) indexed; files=335079
+[02:22:34.542 I] peer.cpp:1279: replica stored: 'n02_s035319.txt' (9.77 KiB) indexed; files=335080
+[02:22:34.582 I] index_client.cpp:49: registered 335048 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:34.582 I] index_client.cpp:49: registered 32 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:34.662 I] peer.cpp:1279: replica stored: 'n15_s008728.txt' (9.77 KiB) indexed; files=335081
+[02:22:34.679 I] peer.cpp:1279: replica stored: 'n05_s065281.txt' (9.77 KiB) indexed; files=335082
+[02:22:34.709 I] peer.cpp:1279: replica stored: 'n02_s063536.txt' (9.77 KiB) indexed; files=335083
+[02:22:34.727 I] peer.cpp:1279: replica stored: 'n03_s037055.txt' (9.77 KiB) indexed; files=335084
+[02:22:34.730 I] peer.cpp:1279: replica stored: 'n05_s038791.txt' (9.77 KiB) indexed; files=335085
+[02:22:34.735 I] peer.cpp:1279: replica stored: 'n05_s038852.txt' (9.77 KiB) indexed; files=335086
+[02:22:34.744 I] peer.cpp:1279: replica stored: 'n02_s032026.txt' (9.77 KiB) indexed; files=335087
+[02:22:34.773 I] peer.cpp:1279: replica stored: 'n05_s006677.txt' (9.77 KiB) indexed; files=335088
+[02:22:34.774 I] peer.cpp:1279: replica stored: 'n05_s056702.txt' (9.77 KiB) indexed; files=335089
+[02:22:34.780 I] peer.cpp:1279: replica stored: 'n15_s078266.txt' (9.77 KiB) indexed; files=335090
+[02:22:34.785 I] peer.cpp:1279: replica stored: 'n15_s093409.txt' (9.77 KiB) indexed; files=335091
+[02:22:34.806 I] peer.cpp:1279: replica stored: 'n07_s035062.txt' (9.77 KiB) indexed; files=335092
+[02:22:34.815 I] peer.cpp:1279: replica stored: 'n05_s001320.txt' (9.77 KiB) indexed; files=335093
+[02:22:34.820 I] peer.cpp:1279: replica stored: 'n02_s074446.txt' (9.77 KiB) indexed; files=335094
+[02:22:34.837 I] peer.cpp:1279: replica stored: 'n07_s010179.txt' (9.77 KiB) indexed; files=335095
+[02:22:34.844 I] peer.cpp:1279: replica stored: 'n07_s064176.txt' (9.77 KiB) indexed; files=335096
+[02:22:34.844 I] peer.cpp:1279: replica stored: 'n07_s047139.txt' (9.77 KiB) indexed; files=335097
+[02:22:34.864 I] peer.cpp:1279: replica stored: 'n02_s017791.txt' (9.77 KiB) indexed; files=335098
+[02:22:34.864 I] peer.cpp:1279: replica stored: 'n02_s028447.txt' (9.77 KiB) indexed; files=335099
+[02:22:34.865 I] peer.cpp:1279: replica stored: 'n02_s091982.txt' (9.77 KiB) indexed; files=335100
+[02:22:34.865 I] peer.cpp:1279: replica stored: 'n02_s081907.txt' (9.77 KiB) indexed; files=335101
+[02:22:35.083 I] index_client.cpp:49: registered 21 files with index server (ip 192.168.77.112 dport 51002)
+[02:22:35.487 W] peer.cpp:2036: peer shutting down
+[02:22:35.583 W] index_client.cpp:138: index connection lost; re-registering

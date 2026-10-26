@@ -1,0 +1,4 @@
+0
+[12:09:51.975 I] peer.cpp:1884: status: neighbours_conn=0 files=484796 routes=0 pending=0
+[12:10:21.987 I] peer.cpp:1884: status: neighbours_conn=0 files=484796 routes=0 pending=0
+[12:10:52.000 I] peer.cpp:1884: status: neighbours_conn=0 files=484796 routes=0 pending=0

@@ -1,0 +1,84 @@
+CS 550 PA2 Dev Log
+
+Sun Oct 11: Planning
+- [09:00] Read the handout: 17 VMs on Chameleon, 3 topologies (central, star, 4x4 mesh), 4 experiments, replication and failover.
+- [13:00] Sketched a design that reuses the PA1 code and adds a Gnutella-style servent (seen-set loop prevention, TTL=8, reverse-path route table).
+
+Mon Oct 12: VM layer
+- [09:00] Built a bridge network (192.168.77.0/24) and 17 KVM VMs from an Ubuntu 22.04 cloud image, with cloud-init and ssh keys.
+- [18:00] First 17/17 green run of the VM check script.
+
+Tue Oct 13: Core engine
+- [09:00] Wrote the wire framing, peer listener, HELLO handshake (one channel per pair), flooding with TTL, and reverse-path hit routing.
+- [15:00] Added the direct download plane. First 2-hop query plus download worked on a 4-node ring.
+
+Wed Oct 14: Tooling
+- [09:00] Wrote config and manifest generators for the three topologies, ring replica placement (FNV-1a-64, RF=3), dataset generators, start/stop scripts, and a first bench driver.
+
+Thu Oct 15: First full run, then self-review
+- [08:00] Fixed a compile error and a deploy-path bug, generated 1.6M small and 160 large files, and ran the full matrix (3 topologies x 4 experiments x 3 runs).
+- [19:00] A grader-style review found serious flaws:
+  - The throughput number was an artifact of summing per-client rates.
+  - e1 queried files the client itself owned.
+  - The workload was sequential, not random.
+  - Replication was done by tar|ssh scripts, not the program.
+  - The output files contained shell noise.
+  - The report did not match the code.
+
+Fri Oct 16: Repairs
+- [09:00] Rewrote the bench (microsecond timestamps, seeded random draws, exclusion of own files, shared start time) and the analyzer.
+- [13:00] Fixed link ownership, redial timing and socket binding, and moved replication into the program (PUTREQ/PUTACK).
+- [17:00] Wrote verify-node.sh (all gates pass) and rewrote the readme.
+
+Sat Oct 17: Re-run attempt, then cluster lost
+- [10:00] Aborted a matrix run that started before replication had settled, and self-scored the submission 64/100.
+- [12:00] Pipelined replication pushes and added a boot-race retry.
+- [17:00] The cluster became unreachable, so I built single-host loopback versions of every driver and regenerated all evidence on loopback, labeled honestly.
+
+Sun Oct 18: Loopback bug
+- [10:00] Star topology failed on loopback: dialed sockets used source 127.0.0.1, so the accept side rejected them as non-neighbours.
+- [12:00] Fixed it by binding dialed sockets to the node's own IP, without weakening the accept-side check.
+- [14:00] Wiped the tainted evidence, re-ran the campaign, and archived the old cluster results with an explanation.
+
+Mon Oct 19: Cluster returns, campaigns #1-#4
+- [08:00] The cluster came back, so all numbers were re-measured on the real 17 VMs.
+- [10:00] Fixes:
+  - A replication sweep livelock.
+  - An index-server bug where the janitor dropped busy nodes, leaked fds, and hung clients.
+  - A use-after-free.
+  - A data race in the replication worker (found with ASan).
+  - Ephemeral port exhaustion from TIME_WAIT (fixed with RST-on-close for one-shot sockets).
+- [14:00] Two concurrent drivers corrupted a run, so I added a flock single-instance lock.
+- [18:00] The matrix campaign passed on all topologies: 252 runs, zero FAIL lines.
+- [21:00] The failover campaign went through several harness fixes (seeding discovery via rescan, restarting the star hub, restarting dead mesh nodes) before passing.
+- [23:00] Late that day: regenerated output.txt, added 13 verified references to the report (14 pages), and built a deterministic zip.
+
+Tue Oct 20: GC and failover hardening
+- [08:00] Binary rebuilt and re-pinned with journal provenance and index-hub fallback.
+- [09:00] Census showed 1.6M names with uneven copy counts. A dry-run GC found 1.56M stray copies, and a canary-first GC deleted exactly those. Afterward every name had exactly 3 copies.
+- [14:00] Failover campaigns #1-#7 each hit harness problems (wrong assumptions about replacement copies, drain-gate timing, ssh timeouts, full disks). Each was diagnosed and the harness fixed, with the binary untouched.
+
+Wed Oct 21: Host wiped, rebuilt, campaigns #8-#14
+- [05:00] The Chameleon host was re-imaged and everything on it destroyed. Locally preserved matrix, GC, and census evidence was quarantined and later restored.
+- [06:00] Rebuilt the host: the binary reproduced byte-for-byte, and the 17 VMs were re-provisioned.
+- [11:00] Failover campaigns:
+  - Central run #11 passed with zero asserts.
+  - Star passed in run #12.
+  - Mesh passed in run #14, after recurring ssh-timeout asserts and a second GC round.
+- [16:00] Resized three VM disks because the hash concentrates large blobs on node 14.
+- [20:00] The first output-capture attempt failed on a stray 4th copy, so another GC round was run.
+- [22:00] The 4 GiB test started and failed several times, from a harness regex bug and an ssh stall.
+
+Thu Oct 22: 4 GiB test, disk crisis, output capture
+- [01:00] Traced 4 GiB placement failures to node 6 being falsely marked dead during the owner's stall, which sent the push to a replacement node. Fixed with fallocate file creation, a warmup, and a nudge.
+- [04:00] Run #9d passed all mandatory gates, including kill and re-retrieve of a 4 GiB file.
+- [09:00] The host disk hit 100% and wedged 16 of 17 VMs. Recovered via qcow2 repair and trimming, with evidence intact.
+- [13:00] The "plus-1" (4 GiB+1) test was blocked by a capacity gate (vm8 had about 2.2 GB free). I recorded it as a disk-capacity finding rather than weakening the gate.
+- [15:00] Found a livelock on vm8 caused by a zero-byte debris file, and removed it with authorization.
+- [18:00] Output-capture attempts 1-6 failed on replacement copies left by earlier kill demos, a driver replication interlock, and harness bugs. All were explained, and a "mystery servent deaths" theory was disproved.
+
+Fri Oct 23: Final capture and packaging
+- [01:00] Attempts 7-10 fixed GC sweep completion detection and bounds. A one-time GC cleared about 1.39M legacy stray copies.
+- [07:00] Attempt 11 ran green end to end. The only failure was my own gate arithmetic, which was corrected, and the capture then passed (OUTDEMO3-OK, 698-line output.txt).
+- [10:00] Regenerated analyzer macros, rewrote the readme and report (16 pages), and rebuilt the zip deterministically.
+- [12:00] A final integrity sweep found a stale local p2p binary, which I replaced with the pinned release binary.

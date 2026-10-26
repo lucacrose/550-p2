@@ -1,0 +1,12 @@
+[04:51:07.155 I] local_index.hpp:84: local index loaded 308552 files from /data/shared
+[04:51:07.210 I] peer.cpp:336: peer 15 initialised: ip=192.168.77.115 msg=51000 control=51001 dl=51002 top=mesh neighbours=3 files=308552 ring=16 rf=3 journal=/data/.p2p-repl.meta ring_fallback=1
+[04:51:07.215 I] peer.cpp:496: neighbour 192.168.77.116:51000 channel established (outbound dial)
+[04:51:08.093 I] peer.cpp:598: neighbour 192.168.77.111:51000 channel established (inbound, node 11)
+[04:51:08.653 I] peer.cpp:598: neighbour 192.168.77.114:51000 channel established (inbound, node 14)
+CLI ready: 'query <file>', 'obtain <file>', 'rescan', 'stat', 'quit'
+[04:51:10.256 I] peer.cpp:1703: REPLICATION-DONE pushed=0 skipped=200020 elapsed_ms=3017 (factor=3, index=308552)
+[04:51:37.233 I] peer.cpp:1884: status: neighbours_conn=3 files=308552 routes=1 pending=0
+[04:52:07.249 I] peer.cpp:1884: status: neighbours_conn=3 files=308552 routes=0 pending=0
+display file 'huge4g-4096mib.bin' (4.00 GiB from 192.168.77.114:51002: download 59935 ms, search 1 ms)
+peer 15: files=308552 neighbours_conn=3 routes=0 pending=0
+[04:52:08.602 W] peer.cpp:2036: peer shutting down

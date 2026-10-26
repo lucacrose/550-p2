@@ -1,0 +1,22 @@
+started central topology; waiting for peer readiness...
+all 16 peers responding (vm03: neighbours=0)
+CENTRAL-READY (index mode reports neighbours=0)
+waiting for in-program initial replication to finish (marker)...
+initial replication pass done on all 16 peers in 1 s
+vm02: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=436662 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm03: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=341121 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm04: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=328548 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm05: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=315467 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm06: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=309078 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm07: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=484571 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm08: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=484795 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm09: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=346461 repl(push=0 skip=200030 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm10: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=367544 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm11: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=358809 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm12: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=318781 repl(push=0 skip=200022 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm13: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=317513 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm14: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=318726 repl(push=0 skip=200024 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm15: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=309007 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm16: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=478699 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+vm17: ping 127.0.0.1:51001: OK routes=0 pending=0 neighbours=0 files=445995 repl(push=0 skip=200020 recv=0,done) drops(route=0 hit=0) queries(recv=0 fwd=0 dup=0) hits(orig=0 relay=0)
+START-OK (central)

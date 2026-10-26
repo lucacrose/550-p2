@@ -1,0 +1,17 @@
+=== df -h before placement ===
+vm02 /dev/vda1        15G   12G  2.9G  81% /
+vm03 /dev/vda1        15G  9.6G  4.8G  67% /
+vm04 /dev/vda1        15G  8.9G  5.5G  62% /
+vm05 /dev/vda1        15G  8.6G  5.8G  60% /
+vm06 /dev/vda1        15G  9.2G  5.2G  64% /
+vm07 /dev/vda1        15G  8.5G  6.0G  59% /
+vm08 /dev/vda1        15G  8.5G  6.0G  59% /
+vm09 /dev/vda1        15G  8.7G  5.7G  61% /
+vm10 /dev/vda1        15G  9.0G  5.4G  63% /
+vm11 /dev/vda1        15G  8.5G  6.0G  59% /
+vm12 /dev/vda1        15G  8.7G  5.7G  61% /
+vm13 /dev/vda1        15G  8.8G  5.6G  62% /
+vm14 /dev/vda1        22G  8.6G   13G  41% /
+vm15 /dev/vda1        19G  8.9G  9.4G  49% /
+vm16 /dev/vda1        19G   11G  7.5G  59% /
+vm17 /dev/vda1        15G   12G  2.9G  80% /
